@@ -31,7 +31,7 @@ const getStatIcon = (type: string) => {
       return (
         <svg
           viewBox="0 0 24 24"
-          className="h-6 w-6 text-[#c084fc]"
+          className="h-6 w-6 text-[#0D5B5A]"
           fill="none"
           stroke="currentColor"
           strokeWidth="1.8"
@@ -46,23 +46,23 @@ const getStatIcon = (type: string) => {
       return (
         <svg
           viewBox="0 0 24 24"
-          className="h-6 w-6 text-[#c084fc]"
+          className="h-6 w-6 text-[#0D5B5A]"
           fill="none"
           stroke="currentColor"
           strokeWidth="1.8"
         >
           <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04z" />
           <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04z" />
-          <circle cx="12" cy="7" r="1" fill="#c084fc" />
-          <circle cx="12" cy="12" r="1" fill="#c084fc" />
-          <circle cx="12" cy="17" r="1" fill="#c084fc" />
+          <circle cx="12" cy="7" r="1" fill="#14B8A6" />
+          <circle cx="12" cy="12" r="1" fill="#14B8A6" />
+          <circle cx="12" cy="17" r="1" fill="#14B8A6" />
         </svg>
       );
     case 'shield':
       return (
         <svg
           viewBox="0 0 24 24"
-          className="h-6 w-6 text-[#c084fc]"
+          className="h-6 w-6 text-[#0D5B5A]"
           fill="none"
           stroke="currentColor"
           strokeWidth="1.8"
@@ -75,7 +75,7 @@ const getStatIcon = (type: string) => {
       return (
         <svg
           viewBox="0 0 24 24"
-          className="h-6 w-6 text-[#c084fc]"
+          className="h-6 w-6 text-[#0D5B5A]"
           fill="none"
           stroke="currentColor"
           strokeWidth="1.8"
@@ -110,63 +110,62 @@ const LandingPage = () => {
       ref={heroRef}
       onMouseMove={handleHeroMouseMove}
       onMouseLeave={handleHeroMouseLeave}
-      className="relative min-h-screen w-full overflow-hidden bg-[#06040f] text-white"
+      className="relative min-h-screen w-full overflow-hidden bg-[#F8FAFB] text-[#0C162C]"
     >
       {/* Interactive Background Neural Constellation */}
       <NeuralConstellation />
 
-      {/* Dynamic Cursor Spotlight Aura */}
+      {/* Dynamic Cursor Spotlight Aura (Soft Teal Glow) */}
       {cursorPos.x > 0 && (
         <div
           style={{
             transform: `translate(${cursorPos.x - 300}px, ${cursorPos.y - 300}px)`,
             transition: 'transform 0.1s ease-out',
           }}
-          className="pointer-events-none absolute left-0 top-0 h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle_closest-side,rgba(168,85,247,0.14),transparent_100%)] blur-[50px]"
+          className="pointer-events-none absolute left-0 top-0 h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle_closest-side,rgba(20,184,166,0.12),transparent_100%)] blur-[60px]"
         />
       )}
 
-      {/* Ambient lighting & star mesh */}
-      <div className="pointer-events-none absolute -top-40 left-1/4 h-[550px] w-[550px] rounded-full bg-violet-600/15 blur-[120px] animate-pulse-glow" />
-      <div className="pointer-events-none absolute top-1/4 right-0 h-[600px] w-[600px] rounded-full bg-purple-700/15 blur-[140px]" />
-      <div className="pointer-events-none absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-purple-500/25 to-transparent" />
+      {/* Ambient lighting in soft mint & cyan */}
+      <div className="pointer-events-none absolute -top-40 right-1/4 h-[550px] w-[550px] rounded-full bg-teal-500/10 blur-[130px] animate-pulse-glow" />
+      <div className="pointer-events-none absolute top-1/4 left-0 h-[600px] w-[600px] rounded-full bg-cyan-500/08 blur-[150px]" />
+      <div className="pointer-events-none absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-teal-500/20 to-transparent" />
 
       {/* Hero Main Wrapper */}
-      <div className="relative z-10 mx-auto max-w-[1400px] px-6 pt-8 pb-16 sm:px-10 lg:px-12 lg:pt-10 lg:pb-24">
+      <div className="relative z-10 mx-auto max-w-[1400px] px-6 pt-8 pb-16 sm:px-10 lg:px-12 lg:pt-12 lg:pb-24">
         {/* 2-Column Hero Section */}
-        <section className="grid items-start gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
+        <section className="grid items-center gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
           {/* Left Content Column */}
           <div className="flex flex-col items-start space-y-6 sm:space-y-8">
             {/* Badge: "Your Second Brain" */}
-            <div className="inline-flex items-center gap-2.5 rounded-full border border-purple-500/35 bg-[#160f2e]/90 px-4 py-2 text-xs sm:text-sm font-medium text-purple-200 shadow-[0_0_20px_rgba(168,85,247,0.25)] backdrop-blur-md transition duration-300 hover:border-purple-400 hover:shadow-[0_0_25px_rgba(168,85,247,0.4)]">
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-[#D2E5E2] bg-[#EAF3F2] px-4 py-2 text-xs sm:text-sm font-semibold text-[#0C162C] shadow-sm backdrop-blur-md transition duration-300 hover:border-teal-400">
               <span className="relative flex h-2.5 w-2.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-pink-400 opacity-75" />
-                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-purple-400" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#0C162C]" />
               </span>
               <span className="tracking-wide">Your Second Brain</span>
             </div>
 
             {/* Main Hero Headings */}
             <div className="space-y-2">
-              <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-6xl xl:text-[4.25rem] leading-[1.08]">
+              <h1 className="text-4xl font-extrabold tracking-tight text-[#0C162C] sm:text-6xl xl:text-[4.25rem] leading-[1.08]">
                 Remember Everything.
               </h1>
-              <h2 className="text-4xl font-extrabold tracking-tight sm:text-6xl xl:text-[4.25rem] leading-[1.08] bg-gradient-to-r from-[#c084fc] via-[#a855f7] to-[#d946ef] bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(168,85,247,0.45)]">
+              <h2 className="text-4xl font-extrabold tracking-tight text-[#0C162C] sm:text-6xl xl:text-[4.25rem] leading-[1.08]">
                 Forget Nothing.
               </h2>
             </div>
 
             {/* Subtitle Description */}
-            <p className="max-w-xl text-base sm:text-lg leading-relaxed text-slate-300">
+            <p className="max-w-xl text-base sm:text-lg leading-relaxed text-slate-600 font-normal">
               MemoryMind AI helps you capture, organize, and understand all your
               knowledge using the power of AI.
             </p>
 
             {/* Action CTA Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-1">
+            <div className="flex flex-wrap items-center gap-4 pt-2">
               <a
                 href="#get-started"
-                className="relative group overflow-hidden inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#6d28d9] via-[#7c3aed] to-[#9333ea] px-8 py-3.5 text-base font-semibold text-white shadow-[0_0_30px_rgba(124,58,237,0.5)] transition duration-300 hover:shadow-[0_0_45px_rgba(147,51,234,0.8)] hover:scale-[1.02] active:scale-[0.98]"
+                className="relative group overflow-hidden inline-flex items-center justify-center rounded-full bg-[#0D5B5A] px-8 py-3.5 text-base font-semibold text-white shadow-[0_8px_25px_rgba(13,91,90,0.35)] transition duration-300 hover:bg-[#0A4A49] hover:shadow-[0_12px_32px_rgba(13,91,90,0.5)] hover:scale-[1.02] active:scale-[0.98]"
               >
                 <span className="absolute inset-0 w-full h-full animate-shimmer pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" />
                 <span className="relative z-10 flex items-center gap-2">
@@ -184,27 +183,27 @@ const LandingPage = () => {
               </a>
               <a
                 href="#demo"
-                className="inline-flex items-center justify-center rounded-full border border-white/15 bg-[#120f24]/90 px-8 py-3.5 text-base font-semibold text-white backdrop-blur-md transition duration-300 hover:border-purple-400/50 hover:bg-[#1b1636] hover:shadow-[0_0_20px_rgba(168,85,247,0.2)] active:scale-[0.98]"
+                className="inline-flex items-center justify-center rounded-full border-2 border-[#0C162C] bg-white px-8 py-3.5 text-base font-semibold text-[#0C162C] shadow-sm transition duration-300 hover:bg-slate-50 hover:shadow-md active:scale-[0.98]"
               >
                 Watch Demo
               </a>
             </div>
           </div>
 
-          {/* Right Hero Visual Column (Multi-Mode 3D Visualizer) */}
+          {/* Right Hero Visual Column (3D Hologram Platform & Floating UI Cards) */}
           <div className="relative flex items-center justify-center lg:sticky lg:top-24">
             <HeroVisual />
           </div>
         </section>
 
         {/* Bottom Feature Stats Card with Conic Glowing Border */}
-        <div className="relative mt-14 sm:mt-20 overflow-hidden rounded-2xl p-[1px]">
-          {/* Animated Conic Gradient Laser Border */}
-          <div className="absolute -inset-[150%] animate-conic-spin bg-[conic-gradient(from_0deg,_transparent_0_300deg,_#a855f7_330deg,_#ec4899_360deg)] opacity-75" />
+        <div className="relative mt-14 sm:mt-20 overflow-hidden rounded-2xl p-[1px] shadow-lg">
+          {/* Animated Conic Gradient Laser Border in Mint/Teal */}
+          <div className="absolute -inset-[150%] animate-conic-spin bg-[conic-gradient(from_0deg,_transparent_0_300deg,_#14b8a6_330deg,_#0d5b5a_360deg)] opacity-60" />
 
           {/* Card Inner Content */}
-          <div className="relative rounded-2xl bg-[#0c0920]/90 p-5 sm:p-7 backdrop-blur-2xl">
-            <div className="grid grid-cols-2 gap-6 lg:grid-cols-4 lg:gap-8 divide-y lg:divide-y-0 lg:divide-x divide-white/[0.08]">
+          <div className="relative rounded-2xl bg-white/90 p-5 sm:p-7 backdrop-blur-2xl border border-slate-200/80">
+            <div className="grid grid-cols-2 gap-6 lg:grid-cols-4 lg:gap-8 divide-y lg:divide-y-0 lg:divide-x divide-slate-200/80">
               {heroStats.map((stat, idx) => (
                 <div
                   key={stat.title}
@@ -212,14 +211,14 @@ const LandingPage = () => {
                     idx > 0 && idx % 2 === 0 ? 'pt-4 lg:pt-0' : ''
                   } ${idx > 1 ? 'pt-4 lg:pt-0' : ''} ${idx !== 0 ? 'lg:pl-8' : ''}`}
                 >
-                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl border border-purple-500/20 bg-purple-500/10 shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all duration-300 group-hover:scale-110 group-hover:border-purple-400/50 group-hover:shadow-[0_0_30px_rgba(168,85,247,0.45)]">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl border border-[#0D5B5A]/20 bg-[#0D5B5A]/10 shadow-sm transition-all duration-300 group-hover:scale-110 group-hover:border-[#0D5B5A]/40 group-hover:shadow-[0_0_20px_rgba(13,91,90,0.25)]">
                     {getStatIcon(stat.icon)}
                   </div>
                   <div>
-                    <div className="text-xl sm:text-2xl font-bold tracking-tight text-white group-hover:text-purple-200 transition-colors">
+                    <div className="text-xl sm:text-2xl font-bold tracking-tight text-[#0C162C] group-hover:text-[#0D5B5A] transition-colors">
                       {stat.title}
                     </div>
-                    <div className="text-xs sm:text-sm font-medium text-slate-400">
+                    <div className="text-xs sm:text-sm font-medium text-slate-500">
                       {stat.subtitle}
                     </div>
                   </div>
@@ -229,6 +228,17 @@ const LandingPage = () => {
           </div>
         </div>
       </div>
+
+      {/* Floating Color Palette Swatch Widget (Exact Match to User Reference Image) */}
+      <aside 
+        aria-label="Color Palette Swatch"
+        className="fixed bottom-6 right-6 z-40 flex flex-col items-center gap-2 rounded-full border border-slate-200 bg-white/95 p-2 shadow-[0_8px_30px_rgba(0,0,0,0.12)] backdrop-blur-md transition hover:scale-105"
+      >
+        <div className="h-5 w-5 rounded-full bg-[#0C192E] ring-1 ring-black/10 shadow-inner" title="Deep Midnight Navy (#0C192E)" />
+        <div className="h-5 w-5 rounded-full bg-[#0D5B5A] ring-1 ring-black/10 shadow-inner" title="Deep Pine Teal (#0D5B5A)" />
+        <div className="h-5 w-5 rounded-full bg-[#FFFFFF] ring-1 ring-slate-300 shadow-sm" title="Pure White (#FFFFFF)" />
+        <div className="h-5 w-5 rounded-full bg-[#DCE7E9] ring-1 ring-black/5 shadow-inner" title="Soft Pale Mint Gray (#DCE7E9)" />
+      </aside>
     </div>
   );
 };

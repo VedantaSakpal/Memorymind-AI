@@ -214,7 +214,7 @@ const AppSidebar = ({ mobileOpen, setMobileOpen }: AppSidebarProps) => {
       )}
 
       <aside
-        className={`fixed top-0 bottom-0 left-0 z-50 flex w-64 flex-col justify-between bg-[#080B18] text-slate-300 transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 ${
+        className={`fixed top-0 bottom-0 left-0 z-50 flex w-64 flex-col justify-between bg-[#0C192E] text-slate-300 transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 ${
           mobileOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -227,7 +227,7 @@ const AppSidebar = ({ mobileOpen, setMobileOpen }: AppSidebarProps) => {
               className="flex items-center gap-3 group transition"
             >
               <Logo />
-              <span className="text-lg font-bold tracking-tight text-white group-hover:text-purple-300 transition">
+              <span className="text-lg font-bold tracking-tight text-white group-hover:text-teal-300 transition">
                 MemoryMind AI
               </span>
             </Link>
@@ -269,8 +269,8 @@ const AppSidebar = ({ mobileOpen, setMobileOpen }: AppSidebarProps) => {
                   onClick={handleNavClick}
                   className={`flex items-center gap-3.5 rounded-xl px-4 py-2.5 text-sm font-medium transition duration-200 ${
                     isActive
-                      ? 'bg-[#6C2BFF] text-white shadow-[0_4px_18px_rgba(108,43,255,0.45)]'
-                      : 'text-slate-400 hover:bg-white/[0.06] hover:text-slate-100'
+                      ? 'bg-[#0D5B5A] text-white shadow-[0_4px_16px_rgba(13,91,90,0.45)]'
+                      : 'text-slate-300 hover:bg-white/[0.08] hover:text-white'
                   }`}
                 >
                   <span className={isActive ? 'text-white' : 'text-slate-400'}>
@@ -286,14 +286,14 @@ const AppSidebar = ({ mobileOpen, setMobileOpen }: AppSidebarProps) => {
         {/* Bottom User Profile Section */}
         <div className="border-t border-white/[0.08] p-4">
           <div className="flex items-center gap-3 rounded-xl bg-white/[0.04] p-2.5 transition hover:bg-white/[0.08]">
-            <div className="relative flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-tr from-purple-600 to-indigo-500 font-semibold text-white shadow-[0_0_12px_rgba(108,43,255,0.4)] ring-2 ring-purple-400/40">
+            <div className="relative flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-tr from-[#0D5B5A] to-[#14B8A6] font-semibold text-white shadow-sm ring-2 ring-teal-400/40">
               <span>RM</span>
-              <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-emerald-500 ring-2 ring-[#080B18]" />
+              <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-2 ring-[#0C192E]" />
             </div>
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-bold text-white">Rishabh Mahadik</p>
               <div className="flex items-center gap-1.5">
-                <span className="inline-flex items-center rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 px-2 py-0.5 text-[10px] font-semibold text-purple-300 border border-purple-400/30">
+                <span className="inline-flex items-center rounded-full bg-teal-500/20 px-2 py-0.5 text-[10px] font-semibold text-teal-300 border border-teal-400/30">
                   ✨ Premium
                 </span>
               </div>

@@ -17,16 +17,16 @@ const LoginPage = () => {
   return (
     <div className="flex min-h-screen w-full bg-white font-sans antialiased text-slate-900">
       {/* LEFT COLUMN: Dark Navy / Futuristic Hero */}
-      <div className="relative hidden w-1/2 flex-col justify-between overflow-hidden bg-[#080B18] p-12 text-white lg:flex xl:p-16">
+      <div className="relative hidden w-1/2 flex-col justify-between overflow-hidden bg-[#0C192E] p-12 text-white lg:flex xl:p-16">
         {/* Background ambient glows & particle constellation */}
-        <div className="pointer-events-none absolute -top-24 -left-24 h-96 w-96 rounded-full bg-purple-600/20 blur-[100px]" />
-        <div className="pointer-events-none absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-indigo-600/25 blur-[120px]" />
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(#a855f7_1px,transparent_1px)] [background-size:24px_24px] opacity-20" />
+        <div className="pointer-events-none absolute -top-24 -left-24 h-96 w-96 rounded-full bg-teal-500/20 blur-[100px]" />
+        <div className="pointer-events-none absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-cyan-600/20 blur-[120px]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(#14b8a6_1px,transparent_1px)] [background-size:24px_24px] opacity-20" />
 
         {/* Top brand */}
         <Link to="/" className="relative z-10 flex items-center gap-3 group">
           <Logo />
-          <span className="text-xl font-bold tracking-tight text-white transition group-hover:text-purple-300">
+          <span className="text-xl font-bold tracking-tight text-white transition group-hover:text-teal-300">
             MemoryMind AI
           </span>
         </Link>
@@ -45,30 +45,30 @@ const LoginPage = () => {
           {/* Futuristic AI Student / Hologram Visual */}
           <div className="relative flex h-[320px] w-full max-w-[380px] items-center justify-center">
             {/* Holographic glowing base */}
-            <div className="absolute bottom-4 h-24 w-64 rounded-full bg-purple-600/30 blur-2xl animate-pulse" />
-            <div className="absolute bottom-8 h-12 w-48 rounded-full border border-purple-500/40 bg-purple-500/10" />
+            <div className="absolute bottom-4 h-24 w-64 rounded-full bg-teal-500/30 blur-2xl animate-pulse" />
+            <div className="absolute bottom-8 h-12 w-48 rounded-full border border-teal-400/40 bg-teal-500/10" />
 
             {/* Glowing avatar visual frame */}
             <div className="relative z-10 flex flex-col items-center">
-              <div className="relative flex h-36 w-36 items-center justify-center rounded-3xl border border-purple-500/40 bg-gradient-to-tr from-purple-900/60 to-indigo-900/60 p-4 shadow-[0_0_40px_rgba(108,43,255,0.4)] backdrop-blur-xl">
-                <div className="flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-tr from-[#6C2BFF] to-[#a855f7] text-4xl shadow-inner">
+              <div className="relative flex h-36 w-36 items-center justify-center rounded-3xl border border-teal-500/40 bg-gradient-to-tr from-teal-950/70 to-slate-900/70 p-4 shadow-[0_0_40px_rgba(20,184,166,0.3)] backdrop-blur-xl">
+                <div className="flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-tr from-[#0D5B5A] to-[#14B8A6] text-4xl shadow-inner">
                   👨‍💻
                 </div>
                 {/* Floating nodes around avatar */}
-                <div className="absolute -top-3 -right-3 flex h-8 w-8 items-center justify-center rounded-full border border-purple-400/50 bg-[#160d38] text-sm shadow-md animate-bounce">
+                <div className="absolute -top-3 -right-3 flex h-8 w-8 items-center justify-center rounded-full border border-teal-400/50 bg-[#0C192E] text-sm shadow-md animate-bounce">
                   ⚡
                 </div>
-                <div className="absolute -bottom-2 -left-3 flex h-8 w-8 items-center justify-center rounded-full border border-purple-400/50 bg-[#160d38] text-sm shadow-md">
+                <div className="absolute -bottom-2 -left-3 flex h-8 w-8 items-center justify-center rounded-full border border-teal-400/50 bg-[#0C192E] text-sm shadow-md">
                   🧠
                 </div>
               </div>
 
               {/* Floating Hologram Data stream pills */}
               <div className="mt-6 flex flex-wrap justify-center gap-2">
-                <span className="rounded-full border border-purple-500/30 bg-purple-950/60 px-3 py-1 text-xs text-purple-200 backdrop-blur-md">
+                <span className="rounded-full border border-teal-500/30 bg-teal-950/60 px-3 py-1 text-xs text-teal-200 backdrop-blur-md">
                   ● 128 Documents Synced
                 </span>
-                <span className="rounded-full border border-indigo-500/30 bg-indigo-950/60 px-3 py-1 text-xs text-indigo-200 backdrop-blur-md">
+                <span className="rounded-full border border-cyan-500/30 bg-cyan-950/60 px-3 py-1 text-xs text-cyan-200 backdrop-blur-md">
                   ✦ Neural Graph Ready
                 </span>
               </div>
@@ -78,7 +78,7 @@ const LoginPage = () => {
 
         {/* Footer info */}
         <div className="relative z-10 flex items-center justify-between text-xs text-slate-400">
-          <span>© 2025 MemoryMind AI</span>
+          <span>© 2026 MemoryMind AI</span>
           <span>Privacy & Terms</span>
         </div>
       </div>
@@ -172,7 +172,7 @@ const LoginPage = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="name@example.com"
-                className="w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 transition focus:border-[#6C2BFF] focus:outline-none focus:ring-2 focus:ring-[#6C2BFF]/20"
+                className="w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 transition focus:border-[#0D5B5A] focus:outline-none focus:ring-2 focus:ring-[#0D5B5A]/20"
               />
             </div>
 
@@ -187,7 +187,7 @@ const LoginPage = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
-                  className="w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 pr-10 text-sm text-slate-900 placeholder-slate-400 transition focus:border-[#6C2BFF] focus:outline-none focus:ring-2 focus:ring-[#6C2BFF]/20"
+                  className="w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 pr-10 text-sm text-slate-900 placeholder-slate-400 transition focus:border-[#0D5B5A] focus:outline-none focus:ring-2 focus:ring-[#0D5B5A]/20"
                 />
                 <button
                   type="button"
@@ -240,13 +240,13 @@ const LoginPage = () => {
                   type="checkbox"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
-                  className="h-4 w-4 rounded border-slate-300 text-[#6C2BFF] focus:ring-[#6C2BFF]"
+                  className="h-4 w-4 rounded border-slate-300 text-[#0D5B5A] focus:ring-[#0D5B5A]"
                 />
                 Remember me
               </label>
               <a
                 href="#forgot"
-                className="text-xs font-semibold text-[#6C2BFF] hover:underline"
+                className="text-xs font-semibold text-[#0D5B5A] hover:underline"
               >
                 Forgot password?
               </a>
@@ -255,7 +255,7 @@ const LoginPage = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              className="mt-2 w-full rounded-xl bg-gradient-to-r from-[#6C2BFF] to-[#7C3AED] py-3 text-sm font-semibold text-white shadow-[0_4px_18px_rgba(108,43,255,0.35)] transition duration-200 hover:opacity-95 hover:shadow-[0_6px_22px_rgba(108,43,255,0.5)] active:scale-[0.99]"
+              className="mt-2 w-full rounded-xl bg-[#0D5B5A] py-3 text-sm font-semibold text-white shadow-[0_4px_18px_rgba(13,91,90,0.35)] transition duration-200 hover:bg-[#0A4A49] hover:shadow-[0_6px_22px_rgba(13,91,90,0.45)] active:scale-[0.99]"
             >
               Login
             </button>
@@ -264,7 +264,7 @@ const LoginPage = () => {
           {/* Footer Register prompt */}
           <div className="mt-8 text-center text-xs text-slate-500">
             Don&apos;t have an account?{' '}
-            <Link to="/login" className="font-bold text-[#6C2BFF] hover:underline">
+            <Link to="/login" className="font-bold text-[#0D5B5A] hover:underline">
               Register
             </Link>
           </div>

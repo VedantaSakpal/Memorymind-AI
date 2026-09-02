@@ -19,7 +19,7 @@ const folders = [
   {
     name: 'Research Papers',
     filesCount: '24 files',
-    color: 'bg-purple-100/70 text-purple-700',
+    color: 'bg-teal-100/70 text-[#0D5B5A]',
   },
   {
     name: 'Personal',
@@ -126,7 +126,7 @@ const MyDocumentsPage = () => {
 
         <Link
           to="/documents/upload"
-          className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#6C2BFF] to-[#7C3AED] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_4px_16px_rgba(108,43,255,0.35)] transition duration-200 hover:opacity-95 active:scale-[0.98]"
+          className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#0D5B5A] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_4px_16px_rgba(13,91,90,0.35)] transition duration-200 hover:bg-[#0A4A49] active:scale-[0.98]"
         >
           <svg
             className="h-4 w-4"
@@ -163,7 +163,7 @@ const MyDocumentsPage = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search documents..."
-            className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-10 pr-4 text-sm text-slate-800 placeholder-slate-400 shadow-sm transition focus:border-[#6C2BFF] focus:outline-none focus:ring-2 focus:ring-[#6C2BFF]/20"
+            className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-10 pr-4 text-sm text-slate-800 placeholder-slate-400 shadow-sm transition focus:border-[#0D5B5A] focus:outline-none focus:ring-2 focus:ring-[#0D5B5A]/20"
           />
         </div>
 
@@ -172,7 +172,7 @@ const MyDocumentsPage = () => {
           <select
             value={selectedType}
             onChange={(e) => setSelectedType(e.target.value)}
-            className="rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-slate-700 shadow-sm focus:border-[#6C2BFF] focus:outline-none"
+            className="rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-slate-700 shadow-sm focus:border-[#0D5B5A] focus:outline-none"
           >
             <option>All Types</option>
             <option>PDF Documents</option>
@@ -180,7 +180,7 @@ const MyDocumentsPage = () => {
             <option>Presentations</option>
           </select>
 
-          <select className="rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-slate-700 shadow-sm focus:border-[#6C2BFF] focus:outline-none">
+          <select className="rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-slate-700 shadow-sm focus:border-[#0D5B5A] focus:outline-none">
             <option>Recently Added</option>
             <option>Alphabetical</option>
             <option>File Size</option>
@@ -193,7 +193,7 @@ const MyDocumentsPage = () => {
               onClick={() => setViewMode('list')}
               className={`rounded-lg p-1.5 transition ${
                 viewMode === 'list'
-                  ? 'bg-purple-100/70 text-[#6C2BFF]'
+                  ? 'bg-teal-50 text-[#0D5B5A]'
                   : 'text-slate-400 hover:text-slate-600'
               }`}
               aria-label="List View"
@@ -218,7 +218,7 @@ const MyDocumentsPage = () => {
               onClick={() => setViewMode('grid')}
               className={`rounded-lg p-1.5 transition ${
                 viewMode === 'grid'
-                  ? 'bg-purple-100/70 text-[#6C2BFF]'
+                  ? 'bg-teal-50 text-[#0D5B5A]'
                   : 'text-slate-400 hover:text-slate-600'
               }`}
               aria-label="Grid View"
@@ -245,7 +245,7 @@ const MyDocumentsPage = () => {
         {folders.map((folder) => (
           <div
             key={folder.name}
-            className="flex items-center gap-3 rounded-2xl border border-slate-200/80 bg-white p-3.5 shadow-sm transition hover:border-[#6C2BFF]/30 hover:shadow-md cursor-pointer group"
+            className="flex items-center gap-3 rounded-2xl border border-slate-200/80 bg-white p-3.5 shadow-sm transition hover:border-[#0D5B5A]/30 hover:shadow-md cursor-pointer group"
           >
             <div
               className={`flex h-10 w-10 items-center justify-center rounded-xl ${folder.color} group-hover:scale-105 transition`}
@@ -255,7 +255,7 @@ const MyDocumentsPage = () => {
               </svg>
             </div>
             <div className="min-w-0 flex-1">
-              <p className="text-xs font-bold text-slate-800 truncate group-hover:text-[#6C2BFF] transition">
+              <p className="text-xs font-bold text-slate-800 truncate group-hover:text-[#0D5B5A] transition">
                 {folder.name}
               </p>
               <p className="text-[11px] text-slate-400 font-medium">
@@ -268,7 +268,7 @@ const MyDocumentsPage = () => {
         {/* Dotted + New Folder button */}
         <button
           type="button"
-          className="flex items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50/50 p-3.5 text-xs font-semibold text-slate-600 transition hover:border-[#6C2BFF] hover:text-[#6C2BFF] hover:bg-purple-50/30"
+          className="flex items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50/50 p-3.5 text-xs font-semibold text-slate-600 transition hover:border-[#0D5B5A] hover:text-[#0D5B5A] hover:bg-teal-50/30"
         >
           <span className="text-base font-bold">+</span>
           <span>New Folder</span>
@@ -294,7 +294,7 @@ const MyDocumentsPage = () => {
                     <td className="py-3.5 px-6">
                       <div className="flex items-center gap-3">
                         {getDocIcon(doc.type)}
-                        <span className="font-semibold text-slate-900 group-hover:text-[#6C2BFF] transition cursor-pointer">
+                        <span className="font-semibold text-slate-900 group-hover:text-[#0D5B5A] transition cursor-pointer">
                           {doc.name}
                         </span>
                       </div>
@@ -332,19 +332,19 @@ const MyDocumentsPage = () => {
                         <div className="absolute right-6 top-10 w-44 rounded-xl border border-slate-200 bg-white p-1.5 shadow-xl z-50 text-left text-xs font-medium text-slate-700">
                           <Link
                             to="/chat"
-                            className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-purple-50 hover:text-[#6C2BFF]"
+                            className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-teal-50 hover:text-[#0D5B5A]"
                           >
                             <span>💬</span> Ask in AI Chat
                           </Link>
                           <Link
                             to="/flashcards"
-                            className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-purple-50 hover:text-[#6C2BFF]"
+                            className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-teal-50 hover:text-[#0D5B5A]"
                           >
                             <span>🗂️</span> Create Flashcards
                           </Link>
                           <Link
                             to="/quizzes"
-                            className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-purple-50 hover:text-[#6C2BFF]"
+                            className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-teal-50 hover:text-[#0D5B5A]"
                           >
                             <span>📝</span> Generate Quiz
                           </Link>
@@ -370,7 +370,7 @@ const MyDocumentsPage = () => {
           {filteredDocs.map((doc) => (
             <div
               key={doc.id}
-              className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm transition hover:border-[#6C2BFF]/40 hover:shadow-md"
+              className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm transition hover:border-[#0D5B5A]/40 hover:shadow-md"
             >
               <div className="flex items-start justify-between">
                 {getDocIcon(doc.type)}
@@ -383,13 +383,13 @@ const MyDocumentsPage = () => {
               <div className="mt-4 flex items-center gap-2 border-t border-slate-100 pt-3">
                 <Link
                   to="/chat"
-                  className="flex-1 rounded-xl bg-purple-50 py-1.5 text-center text-xs font-semibold text-[#6C2BFF] hover:bg-[#6C2BFF] hover:text-white transition"
+                  className="flex-1 rounded-xl bg-teal-50 py-1.5 text-center text-xs font-semibold text-[#0D5B5A] hover:bg-[#0D5B5A] hover:text-white transition"
                 >
                   Ask AI
                 </Link>
                 <Link
                   to="/quizzes"
-                  className="flex-1 rounded-xl border border-slate-200 py-1.5 text-center text-xs font-semibold text-slate-700 hover:border-purple-300 transition"
+                  className="flex-1 rounded-xl border border-slate-200 py-1.5 text-center text-xs font-semibold text-slate-700 hover:border-teal-300 transition"
                 >
                   Quiz
                 </Link>

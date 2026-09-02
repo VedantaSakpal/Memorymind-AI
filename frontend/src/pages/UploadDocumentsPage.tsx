@@ -6,7 +6,7 @@ const supportedFormats = [
   { ext: 'DOCX', color: 'bg-blue-500 text-white', icon: '📝' },
   { ext: 'PPTX', color: 'bg-amber-500 text-white', icon: '📊' },
   { ext: 'TXT', color: 'bg-slate-500 text-white', icon: '📃' },
-  { ext: 'MD', color: 'bg-purple-500 text-white', icon: '📑' },
+  { ext: 'MD', color: 'bg-teal-600 text-white', icon: '📑' },
   { ext: 'JPG', color: 'bg-pink-500 text-white', icon: '🖼️' },
   { ext: 'PNG', color: 'bg-teal-500 text-white', icon: '🌄' },
   { ext: 'MP3', color: 'bg-emerald-500 text-white', icon: '🎵' },
@@ -102,8 +102,8 @@ const UploadDocumentsPage = () => {
           onDrop={handleDrop}
           className={`flex flex-col items-center justify-center rounded-2xl border-2 border-dashed py-14 px-6 text-center transition-all ${
             dragActive
-              ? 'border-[#6C2BFF] bg-purple-50/50'
-              : 'border-slate-300 bg-slate-50/40 hover:border-[#6C2BFF]/60 hover:bg-slate-50/80'
+              ? 'border-[#0D5B5A] bg-teal-50/50'
+              : 'border-slate-300 bg-slate-50/40 hover:border-[#0D5B5A]/60 hover:bg-slate-50/80'
           }`}
         >
           {/* Hidden file input */}
@@ -116,9 +116,9 @@ const UploadDocumentsPage = () => {
           />
 
           {/* Cloud Upload Icon */}
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-purple-100/70 text-[#6C2BFF] shadow-sm mb-4">
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-teal-50 text-[#0D5B5A] shadow-sm mb-4">
             <svg
-              className="h-9 w-9 stroke-[#6C2BFF]"
+              className="h-9 w-9 stroke-[#0D5B5A]"
               viewBox="0 0 24 24"
               fill="none"
               strokeWidth="1.8"
@@ -139,7 +139,7 @@ const UploadDocumentsPage = () => {
           <button
             type="button"
             onClick={() => fileInputRef.current?.click()}
-            className="rounded-xl bg-gradient-to-r from-[#6C2BFF] to-[#7C3AED] px-6 py-2.5 text-sm font-semibold text-white shadow-[0_4px_16px_rgba(108,43,255,0.35)] transition duration-200 hover:opacity-95 active:scale-[0.98]"
+            className="rounded-xl bg-[#0D5B5A] px-6 py-2.5 text-sm font-semibold text-white shadow-[0_4px_16px_rgba(13,91,90,0.35)] transition duration-200 hover:bg-[#0A4A49] active:scale-[0.98]"
           >
             Browse Files
           </button>
@@ -155,7 +155,7 @@ const UploadDocumentsPage = () => {
             {supportedFormats.map((format) => (
               <div
                 key={format.ext}
-                className="flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3 py-1.5 shadow-sm transition hover:border-[#6C2BFF]/40"
+                className="flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3 py-1.5 shadow-sm transition hover:border-[#0D5B5A]/40"
               >
                 <span
                   className={`flex h-5 w-5 items-center justify-center rounded-md text-[10px] font-bold ${format.color}`}
@@ -180,7 +180,7 @@ const UploadDocumentsPage = () => {
             </h3>
             <Link
               to="/documents"
-              className="text-xs font-semibold text-[#6C2BFF] hover:underline"
+              className="text-xs font-semibold text-[#0D5B5A] hover:underline"
             >
               Go to My Documents →
             </Link>
@@ -202,7 +202,7 @@ const UploadDocumentsPage = () => {
                     className={`font-semibold ${
                       file.status === 'completed'
                         ? 'text-emerald-600'
-                        : 'text-[#6C2BFF]'
+                        : 'text-[#0D5B5A]'
                     }`}
                   >
                     {file.status === 'completed'
@@ -214,7 +214,7 @@ const UploadDocumentsPage = () => {
                 <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-200">
                   <div
                     style={{ width: `${file.progress}%` }}
-                    className="h-full rounded-full bg-gradient-to-r from-[#6C2BFF] to-emerald-500 transition-all duration-300"
+                    className="h-full rounded-full bg-gradient-to-r from-[#0D5B5A] to-[#14B8A6] transition-all duration-300"
                   />
                 </div>
               </div>

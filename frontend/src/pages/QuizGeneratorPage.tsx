@@ -106,7 +106,7 @@ const QuizGeneratorPage = () => {
             <select
               value={selectedSource}
               onChange={(e) => setSelectedSource(e.target.value)}
-              className="w-full rounded-xl border border-slate-200 bg-[#F8F9FC] px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-slate-800 focus:border-[#6C2BFF] focus:bg-white focus:outline-none"
+              className="w-full rounded-xl border border-slate-200 bg-[#F8F9FC] px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-slate-800 focus:border-[#0D5B5A] focus:bg-white focus:outline-none"
             >
               <option>Machine Learning Notes.pdf</option>
               <option>Deep Learning Notes.pdf</option>
@@ -123,7 +123,7 @@ const QuizGeneratorPage = () => {
             <select
               value={questionType}
               onChange={(e) => setQuestionType(e.target.value)}
-              className="w-full rounded-xl border border-slate-200 bg-[#F8F9FC] px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-slate-800 focus:border-[#6C2BFF] focus:bg-white focus:outline-none"
+              className="w-full rounded-xl border border-slate-200 bg-[#F8F9FC] px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-slate-800 focus:border-[#0D5B5A] focus:bg-white focus:outline-none"
             >
               <option>Multiple Choice</option>
               <option>True / False</option>
@@ -139,7 +139,7 @@ const QuizGeneratorPage = () => {
             <select
               value={questionCount}
               onChange={(e) => setQuestionCount(e.target.value)}
-              className="w-full rounded-xl border border-slate-200 bg-[#F8F9FC] px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-slate-800 focus:border-[#6C2BFF] focus:bg-white focus:outline-none"
+              className="w-full rounded-xl border border-slate-200 bg-[#F8F9FC] px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-slate-800 focus:border-[#0D5B5A] focus:bg-white focus:outline-none"
             >
               <option>10</option>
               <option>15</option>
@@ -154,7 +154,7 @@ const QuizGeneratorPage = () => {
               type="button"
               onClick={handleGenerate}
               disabled={isGenerating}
-              className="w-full rounded-xl bg-gradient-to-r from-[#6C2BFF] to-[#7C3AED] py-2.5 px-4 text-xs sm:text-sm font-bold text-white shadow-[0_4px_16px_rgba(108,43,255,0.35)] transition hover:opacity-95 active:scale-[0.98] disabled:opacity-50"
+              className="w-full rounded-xl bg-[#0D5B5A] py-2.5 px-4 text-xs sm:text-sm font-bold text-white shadow-[0_4px_16px_rgba(13,91,90,0.35)] transition hover:bg-[#0A4A49] active:scale-[0.98] disabled:opacity-50"
             >
               {isGenerating ? 'Generating...' : 'Generate Quiz'}
             </button>
@@ -248,7 +248,7 @@ const QuizGeneratorPage = () => {
           <button
             type="button"
             onClick={handleNext}
-            className="rounded-xl bg-gradient-to-r from-[#6C2BFF] to-[#7C3AED] px-6 py-2.5 text-xs sm:text-sm font-semibold text-white shadow-[0_4px_16px_rgba(108,43,255,0.35)] transition hover:opacity-95"
+            className="rounded-xl bg-[#0D5B5A] px-6 py-2.5 text-xs sm:text-sm font-semibold text-white shadow-[0_4px_16px_rgba(13,91,90,0.35)] transition hover:bg-[#0A4A49]"
           >
             Next
           </button>

@@ -99,7 +99,7 @@ const AIChatPage = () => {
             setMessages([]);
             setActiveChatId('new');
           }}
-          className="flex w-full items-center justify-center gap-2 rounded-xl bg-purple-50 py-2.5 px-4 text-xs font-bold text-[#6C2BFF] border border-purple-200/60 shadow-sm transition hover:bg-[#6C2BFF] hover:text-white"
+          className="flex w-full items-center justify-center gap-2 rounded-xl bg-teal-50 py-2.5 px-4 text-xs font-bold text-[#0D5B5A] border border-teal-200/60 shadow-sm transition hover:bg-[#0D5B5A] hover:text-white"
         >
           <span className="text-base font-bold">+</span>
           <span>New Chat</span>
@@ -122,13 +122,13 @@ const AIChatPage = () => {
                       onClick={() => setActiveChatId(chat.id)}
                       className={`flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-left text-xs font-medium transition truncate ${
                         isActive
-                          ? 'bg-[#6C2BFF]/10 text-[#6C2BFF] font-semibold border border-[#6C2BFF]/20'
+                          ? 'bg-[#0D5B5A]/10 text-[#0D5B5A] font-semibold border border-[#0D5B5A]/20'
                           : 'text-slate-600 hover:bg-slate-100/80 hover:text-slate-900'
                       }`}
                     >
                       <svg
                         className={`h-3.5 w-3.5 flex-shrink-0 ${
-                          isActive ? 'text-[#6C2BFF]' : 'text-slate-400'
+                          isActive ? 'text-[#0D5B5A]' : 'text-slate-400'
                         }`}
                         viewBox="0 0 24 24"
                         fill="none"
@@ -152,7 +152,7 @@ const AIChatPage = () => {
         {/* Chat Header */}
         <div className="flex h-16 items-center justify-between border-b border-slate-100 px-6">
           <div className="flex items-center gap-3">
-            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-purple-100/80 text-[#6C2BFF]">
+            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-teal-50 text-[#0D5B5A]">
               <svg
                 className="h-4 w-4"
                 viewBox="0 0 24 24"
@@ -190,14 +190,14 @@ const AIChatPage = () => {
             >
               {msg.sender === 'user' ? (
                 /* User Bubble */
-                <div className="max-w-xl rounded-2xl bg-gradient-to-r from-[#6C2BFF] to-[#7C3AED] px-4 py-3 text-sm text-white shadow-[0_4px_14px_rgba(108,43,255,0.25)]">
+                <div className="max-w-xl rounded-2xl bg-[#0D5B5A] px-4 py-3 text-sm text-white shadow-[0_4px_14px_rgba(13,91,90,0.25)]">
                   <p>{msg.text}</p>
                 </div>
               ) : (
                 /* AI Message Card matching reference */
                 <div className="max-w-2xl rounded-2xl border border-slate-200/80 bg-[#FBFBFE] p-5 shadow-sm text-slate-800 space-y-3.5">
                   <div className="flex items-center gap-2 border-b border-slate-100 pb-2">
-                    <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-[#6C2BFF] text-white text-xs font-bold shadow-sm">
+                    <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-[#0D5B5A] text-white text-xs font-bold shadow-sm">
                       ✨
                     </span>
                     <span className="text-xs font-bold text-slate-900">
@@ -214,11 +214,11 @@ const AIChatPage = () => {
 
                   {/* Formula Callout if present */}
                   {msg.formula && (
-                    <div className="rounded-xl border border-purple-200/60 bg-purple-50/70 p-3 text-xs">
+                    <div className="rounded-xl border border-teal-200/60 bg-teal-50/70 p-3 text-xs">
                       <p className="font-semibold text-slate-700">
                         It uses the formula:
                       </p>
-                      <p className="mt-1 font-mono text-sm font-bold text-[#6C2BFF]">
+                      <p className="mt-1 font-mono text-sm font-bold text-[#0D5B5A]">
                         {msg.formula}
                       </p>
                     </div>
@@ -230,7 +230,7 @@ const AIChatPage = () => {
                       <p className="font-semibold text-slate-700">Where:</p>
                       {msg.details.map((d, i) => (
                         <p key={i} className="flex items-center gap-2">
-                          <span className="h-1.5 w-1.5 rounded-full bg-[#6C2BFF]" />
+                          <span className="h-1.5 w-1.5 rounded-full bg-[#0D5B5A]" />
                           <span>{d}</span>
                         </p>
                       ))}
@@ -266,7 +266,7 @@ const AIChatPage = () => {
                           y1="25"
                           x2="220"
                           y2="25"
-                          stroke="#6C2BFF"
+                          stroke="#0D5B5A"
                           strokeWidth="2.5"
                           strokeDasharray="3"
                         />
@@ -283,7 +283,7 @@ const AIChatPage = () => {
                           y1="25"
                           x2="310"
                           y2="50"
-                          stroke="#6C2BFF"
+                          stroke="#0D5B5A"
                           strokeWidth="2.5"
                         />
                         <line
@@ -317,7 +317,7 @@ const AIChatPage = () => {
                         <text
                           x="170"
                           y="18"
-                          fill="#6C2BFF"
+                          fill="#0D5B5A"
                           fontSize="9"
                           fontWeight="bold"
                         >
@@ -326,7 +326,7 @@ const AIChatPage = () => {
                         <text
                           x="270"
                           y="32"
-                          fill="#6C2BFF"
+                          fill="#0D5B5A"
                           fontSize="9"
                           fontWeight="bold"
                         >
@@ -334,7 +334,7 @@ const AIChatPage = () => {
                         </text>
 
                         {/* Nodes */}
-                        <circle cx="40" cy="50" r="16" fill="#6C2BFF" />
+                        <circle cx="40" cy="50" r="16" fill="#0D5B5A" />
                         <text
                           x="40"
                           y="54"
@@ -408,7 +408,7 @@ const AIChatPage = () => {
                           D
                         </text>
 
-                        <circle cx="310" cy="50" r="16" fill="#6C2BFF" />
+                        <circle cx="310" cy="50" r="16" fill="#0D5B5A" />
                         <text
                           x="310"
                           y="54"
@@ -432,7 +432,7 @@ const AIChatPage = () => {
         <div className="border-t border-slate-100 p-4">
           <form
             onSubmit={handleSendMessage}
-            className="flex items-center gap-2 rounded-2xl border border-slate-200 bg-[#F8F9FC] p-1.5 focus-within:border-[#6C2BFF] focus-within:bg-white focus-within:ring-2 focus-within:ring-[#6C2BFF]/20 transition"
+            className="flex items-center gap-2 rounded-2xl border border-slate-200 bg-[#F8F9FC] p-1.5 focus-within:border-[#0D5B5A] focus-within:bg-white focus-within:ring-2 focus-within:ring-[#0D5B5A]/20 transition"
           >
             <button
               type="button"
@@ -460,7 +460,7 @@ const AIChatPage = () => {
 
             <button
               type="submit"
-              className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-r from-[#6C2BFF] to-[#7C3AED] text-white shadow-[0_2px_10px_rgba(108,43,255,0.35)] transition hover:opacity-95 active:scale-95 flex-shrink-0"
+              className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#0D5B5A] text-white shadow-[0_2px_10px_rgba(13,91,90,0.35)] transition hover:bg-[#0A4A49] active:scale-95 flex-shrink-0"
               aria-label="Send message"
             >
               <svg

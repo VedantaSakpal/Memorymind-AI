@@ -41,7 +41,7 @@ const flashcardStats = [
     value: '356',
     icon: (
       <svg
-        className="h-5 w-5 text-[#6C2BFF]"
+        className="h-5 w-5 text-[#0D5B5A]"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
@@ -51,8 +51,8 @@ const flashcardStats = [
         <path d="M6 3h12a2 2 0 0 1 2 2v12" />
       </svg>
     ),
-    bgColor: 'bg-purple-50',
-    borderColor: 'border-purple-100',
+    bgColor: 'bg-teal-50',
+    borderColor: 'border-teal-100',
   },
   {
     title: 'Due Today',
@@ -171,7 +171,7 @@ const FlashcardsPage = () => {
         >
           {/* Top Tag & Close Icon */}
           <div className="flex items-center justify-between">
-            <span className="rounded-full bg-purple-50 px-3 py-1 text-xs font-bold text-[#6C2BFF] border border-purple-200/60">
+            <span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-bold text-[#0D5B5A] border border-teal-200/60">
               {currentCard.category}
             </span>
             <span className="text-xs text-slate-400 font-medium">

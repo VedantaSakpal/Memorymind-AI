@@ -52,7 +52,7 @@ const AppTopbar = ({ onMobileMenuToggle }: AppTopbarProps) => {
           <input
             type="text"
             placeholder="Search anything..."
-            className="w-full rounded-xl border border-slate-200 bg-[#F8F9FC] py-2.5 pl-10 pr-4 text-sm text-slate-800 placeholder-slate-400 transition focus:border-[#6C2BFF] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#6C2BFF]/20"
+            className="w-full rounded-xl border border-slate-200 bg-[#F8F9FC] py-2.5 pl-10 pr-4 text-sm text-slate-800 placeholder-slate-400 transition focus:border-[#0D5B5A] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0D5B5A]/20"
           />
         </div>
       </div>
@@ -77,7 +77,7 @@ const AppTopbar = ({ onMobileMenuToggle }: AppTopbarProps) => {
               <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
               <path d="M13.73 21a2 2 0 0 1-3.46 0" />
             </svg>
-            <span className="absolute 2 top-2 right-2 h-2 w-2 rounded-full bg-[#6C2BFF] ring-2 ring-white" />
+            <span className="absolute 2 top-2 right-2 h-2 w-2 rounded-full bg-[#0D5B5A] ring-2 ring-white" />
           </button>
 
           {/* Notifications Dropdown */}
@@ -85,12 +85,12 @@ const AppTopbar = ({ onMobileMenuToggle }: AppTopbarProps) => {
             <div className="absolute right-0 mt-2 w-80 rounded-2xl border border-slate-200 bg-white p-4 shadow-xl z-50">
               <div className="flex items-center justify-between border-b border-slate-100 pb-2 mb-3">
                 <h4 className="font-bold text-sm text-slate-800">Notifications</h4>
-                <span className="text-xs text-[#6C2BFF] font-medium cursor-pointer">
+                <span className="text-xs text-[#0D5B5A] font-bold cursor-pointer hover:underline">
                   Mark all as read
                 </span>
               </div>
               <div className="space-y-2.5 text-xs">
-                <div className="flex items-start gap-2.5 p-2 rounded-xl bg-purple-50/60 text-slate-700">
+                <div className="flex items-start gap-2.5 p-2 rounded-xl bg-teal-50/70 text-slate-700">
                   <span className="text-base">📄</span>
                   <div>
                     <p className="font-semibold text-slate-900">Document Indexed</p>
@@ -120,7 +120,7 @@ const AppTopbar = ({ onMobileMenuToggle }: AppTopbarProps) => {
             onClick={() => setProfileMenuOpen(!profileMenuOpen)}
             className="flex items-center gap-3 rounded-xl p-1.5 transition hover:bg-slate-50"
           >
-            <div className="relative flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-tr from-purple-600 to-indigo-600 font-semibold text-white shadow-sm ring-2 ring-purple-200">
+            <div className="relative flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-tr from-[#0D5B5A] to-[#14B8A6] font-semibold text-white shadow-sm ring-2 ring-teal-200">
               <span>RM</span>
               <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-emerald-500 ring-2 ring-white" />
             </div>
@@ -129,7 +129,7 @@ const AppTopbar = ({ onMobileMenuToggle }: AppTopbarProps) => {
               <div className="flex items-center gap-1.5">
                 <p className="text-sm font-bold text-slate-900">Rishabh Mahadik</p>
               </div>
-              <p className="text-xs font-medium text-purple-600">Premium</p>
+              <p className="text-xs font-semibold text-[#0D5B5A]">Premium</p>
             </div>
 
             <svg

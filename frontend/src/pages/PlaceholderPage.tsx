@@ -19,7 +19,7 @@ const PlaceholderPage = ({ title, description, icon }: PlaceholderPageProps) => 
 
       {/* Content Container */}
       <div className="flex min-h-[420px] flex-col items-center justify-center rounded-3xl border border-slate-200/80 bg-white p-8 sm:p-12 text-center shadow-sm">
-        <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-purple-50 text-3xl shadow-inner border border-purple-100 mb-4">
+        <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-teal-50 text-3xl shadow-inner border border-teal-100 mb-4">
           {icon}
         </div>
         <h2 className="text-xl font-extrabold text-slate-900">{title} Workspace</h2>
@@ -31,7 +31,7 @@ const PlaceholderPage = ({ title, description, icon }: PlaceholderPageProps) => 
         <div className="mt-6 flex items-center gap-3">
           <Link
             to="/dashboard"
-            className="rounded-xl bg-[#6C2BFF] px-5 py-2.5 text-xs sm:text-sm font-semibold text-white shadow-sm hover:opacity-95 transition"
+            className="rounded-xl bg-[#0D5B5A] px-5 py-2.5 text-xs sm:text-sm font-semibold text-white shadow-sm hover:bg-[#0A4A49] transition"
           >
             Go to Dashboard
           </Link>

@@ -20,7 +20,7 @@ const initialNodes: GraphNode[] = [
     cx: 260,
     cy: 200,
     r: 44,
-    color: '#6C2BFF',
+    color: '#0D5B5A',
     category: 'Artificial Intelligence',
     connectedCount: 12,
     docsCount: 28,
@@ -204,14 +204,14 @@ const KnowledgeGraphPage = () => {
                   cx={centerNode.cx}
                   cy={centerNode.cy}
                   r={centerNode.r + 6}
-                  fill="#6C2BFF"
+                  fill="#0D5B5A"
                   fillOpacity="0.15"
                 />
                 <circle
                   cx={centerNode.cx}
                   cy={centerNode.cy}
                   r={centerNode.r}
-                  fill="#6C2BFF"
+                  fill="#0D5B5A"
                   className="shadow-lg"
                 />
                 <text
@@ -291,7 +291,7 @@ const KnowledgeGraphPage = () => {
 
           <div className="flex items-center justify-between border-t border-slate-100 pt-3 text-xs text-slate-400">
             <span className="flex items-center gap-1.5">
-              <span className="h-2.5 w-2.5 rounded-full bg-[#6C2BFF]" /> Central Theme
+              <span className="h-2.5 w-2.5 rounded-full bg-[#0D5B5A]" /> Central Theme
             </span>
             <span className="flex items-center gap-1.5">
               <span className="h-2.5 w-2.5 rounded-full bg-[#10B981]" /> Sub-Concepts
@@ -320,7 +320,7 @@ const KnowledgeGraphPage = () => {
                 <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
                   Category
                 </p>
-                <p className="mt-0.5 text-sm font-semibold text-[#6C2BFF]">
+                <p className="mt-0.5 text-sm font-semibold text-[#0D5B5A]">
                   {selectedNode.category}
                 </p>
               </div>
@@ -356,7 +356,7 @@ const KnowledgeGraphPage = () => {
           <div className="mt-6 pt-4 border-t border-slate-100">
             <button
               type="button"
-              className="w-full rounded-xl bg-gradient-to-r from-[#6C2BFF] to-[#7C3AED] py-3 text-center text-sm font-semibold text-white shadow-[0_4px_16px_rgba(108,43,255,0.35)] transition hover:opacity-95 active:scale-[0.98]"
+              className="w-full rounded-xl bg-[#0D5B5A] py-3 text-center text-sm font-semibold text-white shadow-[0_4px_16px_rgba(13,91,90,0.35)] transition hover:bg-[#0A4A49] active:scale-[0.98]"
             >
               Explore More
             </button>

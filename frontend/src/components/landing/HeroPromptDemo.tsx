@@ -52,14 +52,14 @@ export const HeroPromptDemo = () => {
   };
 
   return (
-    <div className="w-full max-w-2xl rounded-2xl border border-purple-500/25 bg-[#0e0928]/85 p-4 backdrop-blur-xl shadow-[0_15px_40px_rgba(0,0,0,0.6),0_0_30px_rgba(168,85,247,0.15)] transition duration-300 hover:border-purple-400/40">
+    <div className="w-full max-w-2xl rounded-2xl border border-slate-200/90 bg-white/95 p-5 backdrop-blur-xl shadow-[0_15px_40px_rgba(13,91,90,0.1)] transition duration-300 hover:border-teal-400">
       {/* Top Interactive Prompt Pills */}
-      <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
-        <span className="text-xs font-semibold text-purple-300 flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
+      <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+        <span className="text-xs font-bold text-[#0D5B5A] flex items-center gap-1.5">
+          <span className="h-2 w-2 rounded-full bg-emerald-500 animate-ping" />
           Interactive Second Brain Query
         </span>
-        <span className="text-[11px] font-mono text-purple-400/80">
+        <span className="text-[11px] font-mono text-slate-500">
           ⚡ Latency: {selectedPreset.latency}
         </span>
       </div>
@@ -70,10 +70,10 @@ export const HeroPromptDemo = () => {
             key={preset.id}
             type="button"
             onClick={() => handleSelect(preset)}
-            className={`rounded-full px-3.5 py-1.5 text-xs font-medium transition-all duration-200 ${
+            className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all duration-200 ${
               selectedPreset.id === preset.id
-                ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-[0_0_15px_rgba(168,85,247,0.5)] scale-[1.02]'
-                : 'border border-white/10 bg-[#160f38]/70 text-slate-300 hover:border-purple-400/40 hover:text-white'
+                ? 'bg-[#0D5B5A] text-white shadow-[0_4px_14px_rgba(13,91,90,0.3)] scale-[1.02]'
+                : 'border border-slate-200 bg-slate-50 text-slate-600 hover:border-teal-300 hover:text-[#0C162C]'
             }`}
           >
             {preset.label}
@@ -82,40 +82,40 @@ export const HeroPromptDemo = () => {
       </div>
 
       {/* Query Bar */}
-      <div className="mt-3 rounded-xl border border-purple-500/20 bg-black/40 px-3.5 py-2.5 flex items-center gap-3">
-        <span className="text-purple-400 text-sm">🔍</span>
-        <span className="text-xs sm:text-sm font-medium text-slate-200 truncate">
+      <div className="mt-3 rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 flex items-center gap-3">
+        <span className="text-[#0D5B5A] text-sm">🔍</span>
+        <span className="text-xs sm:text-sm font-medium text-slate-800 truncate">
           {selectedPreset.query}
         </span>
       </div>
 
       {/* Simulated Instant AI Response Box */}
-      <div className="mt-3 rounded-xl border border-purple-500/15 bg-[#120a32]/60 p-3.5">
-        <div className="flex items-center justify-between text-[11px] text-purple-300/80 pb-1.5">
-          <span className="font-semibold text-white flex items-center gap-1.5">
-            <span className="flex h-4 w-4 items-center justify-center rounded-md bg-purple-500/30 text-[10px]">
+      <div className="mt-3 rounded-xl border border-teal-500/20 bg-teal-50/50 p-3.5">
+        <div className="flex items-center justify-between text-[11px] text-teal-800 pb-1.5">
+          <span className="font-bold text-[#0C162C] flex items-center gap-1.5">
+            <span className="flex h-4 w-4 items-center justify-center rounded-md bg-[#0D5B5A] text-white text-[10px]">
               ✨
             </span>
             MemoryMind AI Synthesis
           </span>
-          <span className="rounded bg-emerald-500/10 text-emerald-400 px-1.5 py-0.5 font-mono text-[10px] font-bold">
+          <span className="rounded bg-emerald-500/20 text-emerald-700 px-1.5 py-0.5 font-mono text-[10px] font-bold">
             99.8% Match
           </span>
         </div>
 
         <p
-          className={`mt-1.5 text-xs sm:text-sm text-slate-200 leading-relaxed transition-opacity duration-300 ${isAnswering ? 'opacity-30' : 'opacity-100'}`}
+          className={`mt-1.5 text-xs sm:text-sm text-slate-700 leading-relaxed transition-opacity duration-300 ${isAnswering ? 'opacity-30' : 'opacity-100'}`}
         >
           {selectedPreset.response}
         </p>
 
         {/* Citations & Sources */}
-        <div className="mt-2.5 flex flex-wrap items-center gap-2 pt-2 border-t border-white/[0.06]">
-          <span className="text-[10px] font-medium text-slate-400">Sources:</span>
+        <div className="mt-2.5 flex flex-wrap items-center gap-2 pt-2 border-t border-teal-500/20">
+          <span className="text-[10px] font-semibold text-slate-500">Sources:</span>
           {selectedPreset.sources.map((src, i) => (
             <span
               key={i}
-              className="inline-flex items-center gap-1 rounded-md border border-purple-400/20 bg-purple-500/10 px-2 py-0.5 text-[10px] font-mono text-purple-200"
+              className="inline-flex items-center gap-1 rounded-md border border-teal-600/20 bg-white px-2 py-0.5 text-[10px] font-mono text-[#0D5B5A] shadow-xs"
             >
               📄 {src}
             </span>

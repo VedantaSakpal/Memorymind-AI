@@ -7,7 +7,7 @@ const AppLayout = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen bg-[#F8F9FC] font-sans antialiased text-slate-900 selection:bg-[#6C2BFF] selection:text-white">
+    <div className="flex min-h-screen bg-[#F8F9FC] font-sans antialiased text-slate-900 selection:bg-[#0D5B5A] selection:text-white">
       {/* Dark Navy Sidebar */}
       <AppSidebar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
 

@@ -31,8 +31,8 @@ export const NeuralConstellation = () => {
 
     window.addEventListener('resize', handleResize);
 
-    // Color palette for neural nodes
-    const colors = ['#c084fc', '#a855f7', '#818cf8', '#38bdf8', '#f472b6'];
+    // Color palette for neural nodes matching reference image
+    const colors = ['#0D5B5A', '#14B8A6', '#0F766E', '#06B6D4', '#0C192E'];
 
     // Generate particles
     const particleCount = Math.min(Math.floor((width * height) / 18000), 55);
@@ -115,8 +115,8 @@ export const NeuralConstellation = () => {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
-            const lineAlpha = (1 - dist / maxDistance) * 0.18;
-            ctx.strokeStyle = `rgba(168, 85, 247, ${lineAlpha})`;
+            const lineAlpha = (1 - dist / maxDistance) * 0.25;
+            ctx.strokeStyle = `rgba(20, 184, 166, ${lineAlpha})`;
             ctx.lineWidth = 1;
             ctx.stroke();
           }
@@ -127,8 +127,8 @@ export const NeuralConstellation = () => {
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(mouseX, mouseY);
-          const lineAlpha = (1 - distMouse / 150) * 0.3;
-          ctx.strokeStyle = `rgba(192, 132, 252, ${lineAlpha})`;
+          const lineAlpha = (1 - distMouse / 150) * 0.35;
+          ctx.strokeStyle = `rgba(13, 91, 90, ${lineAlpha})`;
           ctx.lineWidth = 1.2;
           ctx.stroke();
         }
