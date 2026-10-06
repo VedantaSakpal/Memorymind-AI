@@ -4,17 +4,17 @@
 
 :root {
   color-scheme: light;
-  --color-background: #f8fafb;
-  --color-surface: #ffffff;
-  --color-primary: #0d5b5a;
-  --color-secondary: #14b8a6;
-  --color-text: #0c162c;
-  --color-muted: #64748b;
-  --color-border: rgba(13, 91, 90, 0.15);
-  --color-navy: #0c162c;
-  --color-teal: #0d5b5a;
-  --color-teal-dark: #0a4a49;
-  --color-mint: #2dd4bf;
+  --color-background: #FAFAFA;
+  --color-surface: #FFFFFF;
+  --color-primary: #000000;
+  --color-secondary: #FFFFFF;
+  --color-text: #111111;
+  --color-muted: #999999;
+  --color-border: #E5E5E5;
+  --color-navy: #111111;
+  --color-teal: #000000;
+  --color-teal-dark: #111111;
+  --color-mint: #666666;
 }
 
 @layer base {
@@ -26,8 +26,8 @@
       'Segoe UI',
       Roboto,
       sans-serif;
-    background-color: #f8fafb;
-    color: #0c162c;
+    background-color: #FAFAFA;
+    color: #111111;
     text-rendering: optimizeLegibility;
     scroll-behavior: smooth;
   }
@@ -35,8 +35,8 @@
   body {
     margin: 0;
     min-height: 100vh;
-    background-color: #f8fafb;
-    color: #0c162c;
+    background-color: #FAFAFA;
+    color: #111111;
     overflow-x: hidden;
   }
 
@@ -134,11 +134,11 @@
   0%,
   100% {
     opacity: 0.6;
-    filter: drop-shadow(0 0 15px rgba(20, 184, 166, 0.7));
+    filter: drop-shadow(0 0 15px rgba(102, 102, 102, 0.7));
   }
   50% {
     opacity: 1;
-    filter: drop-shadow(0 0 30px rgba(45, 212, 191, 0.95));
+    filter: drop-shadow(0 0 30px rgba(153, 153, 153, 0.95));
   }
 }
 
@@ -250,4 +250,19 @@
 
 .animate-orbit-3 {
   animation: orbit-3 24s linear infinite;
+}
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease-out forwards;
 }

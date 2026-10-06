@@ -61,3 +61,4 @@ uploads/
 # Config files
 *.local
 *.cache
+*.docs/

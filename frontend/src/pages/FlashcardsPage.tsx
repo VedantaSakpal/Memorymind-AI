@@ -41,7 +41,7 @@ const flashcardStats = [
     value: '356',
     icon: (
       <svg
-        className="h-5 w-5 text-[#0D5B5A]"
+        className="h-5 w-5 text-[#000000]"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
@@ -171,7 +171,7 @@ const FlashcardsPage = () => {
         >
           {/* Top Tag & Close Icon */}
           <div className="flex items-center justify-between">
-            <span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-bold text-[#0D5B5A] border border-teal-200/60">
+            <span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-bold text-[#000000] border border-teal-200/60">
               {currentCard.category}
             </span>
             <span className="text-xs text-slate-400 font-medium">

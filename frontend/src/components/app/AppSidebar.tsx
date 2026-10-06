@@ -214,7 +214,7 @@ const AppSidebar = ({ mobileOpen, setMobileOpen }: AppSidebarProps) => {
       )}
 
       <aside
-        className={`fixed top-0 bottom-0 left-0 z-50 flex w-64 flex-col justify-between bg-[#0C192E] text-slate-300 transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 ${
+        className={`fixed top-0 bottom-0 left-0 z-50 flex w-64 flex-col justify-between bg-[#111111] text-slate-300 transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 ${
           mobileOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -269,7 +269,7 @@ const AppSidebar = ({ mobileOpen, setMobileOpen }: AppSidebarProps) => {
                   onClick={handleNavClick}
                   className={`flex items-center gap-3.5 rounded-xl px-4 py-2.5 text-sm font-medium transition duration-200 ${
                     isActive
-                      ? 'bg-[#0D5B5A] text-white shadow-[0_4px_16px_rgba(13,91,90,0.45)]'
+                      ? 'bg-[#000000] text-white shadow-[0_4px_16px_rgba(0,0,0,0.45)]'
                       : 'text-slate-300 hover:bg-white/[0.08] hover:text-white'
                   }`}
                 >
@@ -286,9 +286,9 @@ const AppSidebar = ({ mobileOpen, setMobileOpen }: AppSidebarProps) => {
         {/* Bottom User Profile Section */}
         <div className="border-t border-white/[0.08] p-4">
           <div className="flex items-center gap-3 rounded-xl bg-white/[0.04] p-2.5 transition hover:bg-white/[0.08]">
-            <div className="relative flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-tr from-[#0D5B5A] to-[#14B8A6] font-semibold text-white shadow-sm ring-2 ring-teal-400/40">
+            <div className="relative flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-tr from-[#000000] to-[#666666] font-semibold text-white shadow-sm ring-2 ring-teal-400/40">
               <span>RM</span>
-              <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-2 ring-[#0C192E]" />
+              <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-2 ring-[#111111]" />
             </div>
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-bold text-white">Rishabh Mahadik</p>

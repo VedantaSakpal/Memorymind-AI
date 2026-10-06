@@ -31,7 +31,7 @@ const PlaceholderPage = ({ title, description, icon }: PlaceholderPageProps) => 
         <div className="mt-6 flex items-center gap-3">
           <Link
             to="/dashboard"
-            className="rounded-xl bg-[#0D5B5A] px-5 py-2.5 text-xs sm:text-sm font-semibold text-white shadow-sm hover:bg-[#0A4A49] transition"
+            className="rounded-xl bg-[#000000] px-5 py-2.5 text-xs sm:text-sm font-semibold text-white shadow-sm hover:bg-[#000000] transition"
           >
             Go to Dashboard
           </Link>

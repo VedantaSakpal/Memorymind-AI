@@ -18,7 +18,7 @@ const Navbar = () => {
         {/* Brand Logo */}
         <Link to="/" className="flex items-center gap-3 group">
           <Logo />
-          <span className="text-xl font-extrabold tracking-tight text-[#0C162C] transition group-hover:text-[#0D5B5A]">
+          <span className="text-xl font-extrabold tracking-tight text-[#111111] transition group-hover:text-[#000000]">
             MemoryMind AI
           </span>
         </Link>
@@ -29,7 +29,7 @@ const Navbar = () => {
             <a
               key={link.label}
               href={link.href}
-              className="transition duration-200 hover:text-[#0C162C] hover:font-semibold"
+              className="transition duration-200 hover:text-[#111111] hover:font-semibold"
             >
               {link.label}
             </a>
@@ -40,13 +40,13 @@ const Navbar = () => {
         <div className="hidden items-center gap-4 md:flex">
           <Link
             to="/login"
-            className="rounded-full border border-slate-300 bg-white px-7 py-2 text-sm font-semibold text-[#0C162C] shadow-sm transition duration-200 hover:border-slate-400 hover:bg-slate-50/90 active:scale-95"
+            className="rounded-full border border-slate-300 bg-white px-7 py-2 text-sm font-semibold text-[#111111] shadow-sm transition duration-200 hover:border-slate-400 hover:bg-slate-50/90 active:scale-95"
           >
             Login
           </Link>
           <Link
             to="/dashboard"
-            className="rounded-full bg-[#0D5B5A] px-7 py-2 text-sm font-semibold text-white shadow-[0_4px_14px_rgba(13,91,90,0.35)] transition duration-200 hover:bg-[#0A4A49] hover:shadow-[0_6px_20px_rgba(13,91,90,0.45)] hover:scale-[1.02] active:scale-95"
+            className="rounded-full bg-[#000000] px-7 py-2 text-sm font-semibold text-white shadow-[0_4px_14px_rgba(0,0,0,0.35)] transition duration-200 hover:bg-[#000000] hover:shadow-[0_6px_20px_rgba(0,0,0,0.45)] hover:scale-[1.02] active:scale-95"
           >
             Get Started
           </Link>
@@ -56,7 +56,7 @@ const Navbar = () => {
         <button
           type="button"
           onClick={() => setOpen((value) => !value)}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-[#0C162C] shadow-sm transition hover:bg-slate-50 md:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-[#111111] shadow-sm transition hover:bg-slate-50 md:hidden"
           aria-expanded={open}
           aria-label="Toggle navigation"
         >
@@ -72,7 +72,7 @@ const Navbar = () => {
               <a
                 key={link.label}
                 href={link.href}
-                className="rounded-xl py-2.5 text-base font-medium text-slate-700 hover:bg-slate-100 hover:text-[#0C162C]"
+                className="rounded-xl py-2.5 text-base font-medium text-slate-700 hover:bg-slate-100 hover:text-[#111111]"
                 onClick={() => setOpen(false)}
               >
                 {link.label}
@@ -81,14 +81,14 @@ const Navbar = () => {
             <div className="mt-2 flex flex-col gap-3 pt-3 border-t border-slate-200">
               <Link
                 to="/login"
-                className="rounded-full border border-slate-300 bg-white py-2.5 text-sm font-semibold text-[#0C162C] text-center"
+                className="rounded-full border border-slate-300 bg-white py-2.5 text-sm font-semibold text-[#111111] text-center"
                 onClick={() => setOpen(false)}
               >
                 Login
               </Link>
               <Link
                 to="/dashboard"
-                className="rounded-full bg-[#0D5B5A] py-2.5 text-sm font-semibold text-white shadow-[0_4px_14px_rgba(13,91,90,0.35)] text-center"
+                className="rounded-full bg-[#000000] py-2.5 text-sm font-semibold text-white shadow-[0_4px_14px_rgba(0,0,0,0.35)] text-center"
                 onClick={() => setOpen(false)}
               >
                 Get Started

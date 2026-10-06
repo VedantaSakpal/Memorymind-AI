@@ -9,8 +9,8 @@ To capture deployment planning and environment configuration guidance for Memory
 - Overview
 - Deployment Principles
 - Containerization Strategy
-- Environment Management
-- Release and Rollout
+-
+- Release and Rollou Environment Managementt
 - Notes for Future Implementation
 
 ## Overview

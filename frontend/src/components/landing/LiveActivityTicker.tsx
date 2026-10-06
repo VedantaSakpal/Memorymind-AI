@@ -35,7 +35,7 @@ export const LiveActivityTicker = () => {
               {item.icon}
             </span>
             <span>{item.text}</span>
-            <span className="rounded-md border border-teal-600/20 bg-teal-50 px-2 py-0.5 text-[10px] font-bold text-[#0D5B5A] uppercase tracking-wider">
+            <span className="rounded-md border border-teal-600/20 bg-teal-50 px-2 py-0.5 text-[10px] font-bold text-[#000000] uppercase tracking-wider">
               {item.tag}
             </span>
             <span className="text-teal-400">•</span>

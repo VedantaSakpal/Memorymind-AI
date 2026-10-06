@@ -10,14 +10,14 @@ const Footer = () => (
   <footer className="border-t border-slate-200/90 bg-white/95 py-10 text-slate-600">
     <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between">
       <div className="space-y-2 text-center lg:text-left">
-        <p className="text-2xl font-extrabold text-[#0C162C]">MemoryMind AI</p>
+        <p className="text-2xl font-extrabold text-[#111111]">MemoryMind AI</p>
         <p className="max-w-md text-sm text-slate-500">
           Remember Everything. Forget Nothing.
         </p>
       </div>
       <div className="flex flex-wrap justify-center gap-6 text-sm font-medium text-slate-600">
         {links.map((link) => (
-          <a key={link.label} href={link.href} className="transition hover:text-[#0D5B5A]">
+          <a key={link.label} href={link.href} className="transition hover:text-[#000000]">
             {link.label}
           </a>
         ))}

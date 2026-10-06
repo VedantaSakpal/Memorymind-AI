@@ -72,14 +72,14 @@ const HeroVisual = () => {
               src="/hero-brain.png"
               alt="MemoryMind AI 3D Brain Hologram"
               style={{ transform: 'translateZ(30px)' }}
-              className="w-full h-auto object-contain transition-transform duration-700 ease-out drop-shadow-[0_0_50px_rgba(20,184,166,0.35)]"
+              className="w-full h-auto object-contain transition-transform duration-700 ease-out drop-shadow-[0_0_50px_rgba(102,102,102,0.35)]"
               loading="eager"
             />
 
             {/* Holographic Laser Scan Line in Electric Cyan */}
             <div
               style={{ transform: 'translateZ(45px)' }}
-              className="pointer-events-none absolute inset-x-[15%] h-[2px] bg-gradient-to-r from-transparent via-cyan-400 via-teal-300 to-transparent shadow-[0_0_15px_#2dd4bf] animate-scan-laser"
+              className="pointer-events-none absolute inset-x-[15%] h-[2px] bg-gradient-to-r from-transparent via-cyan-400 via-teal-300 to-transparent shadow-[0_0_15px_#999999] animate-scan-laser"
             />
 
             {/* Floating UI Card 1: Right Knowledge Card (Frosted White & Navy Text) */}
@@ -88,16 +88,16 @@ const HeroVisual = () => {
                 transform: `translate3d(${tilt.rotateY * -0.6}px, ${tilt.rotateX * 0.6}px, 60px)`,
                 transition: 'transform 0.2s cubic-bezier(0.25, 1, 0.5, 1)',
               }}
-              className="absolute -right-2 sm:right-2 top-[38%] z-20 w-[210px] sm:w-[250px] rounded-2xl border border-slate-200/90 bg-white/95 p-3.5 sm:p-4 backdrop-blur-xl shadow-[0_20px_45px_rgba(13,91,90,0.14),0_0_25px_rgba(20,184,166,0.12)] transition-colors duration-300 hover:border-teal-400 cursor-pointer animate-float-reverse"
+              className="absolute -right-2 sm:right-2 top-[38%] z-20 w-[210px] sm:w-[250px] rounded-2xl border border-slate-200/90 bg-white/95 p-3.5 sm:p-4 backdrop-blur-xl shadow-[0_20px_45px_rgba(0,0,0,0.14),0_0_25px_rgba(102,102,102,0.12)] transition-colors duration-300 hover:border-teal-400 cursor-pointer animate-float-reverse"
             >
               <div className="flex items-center justify-between border-b border-slate-100 pb-2">
                 <div className="flex items-center gap-1.5">
                   <span className="h-2 w-2 rounded-full bg-emerald-500 animate-ping" />
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#0D5B5A]">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#000000]">
                     Neural Stream
                   </span>
                 </div>
-                <div className="flex h-5 w-5 items-center justify-center rounded-md bg-teal-50 text-[#0D5B5A]">
+                <div className="flex h-5 w-5 items-center justify-center rounded-md bg-teal-50 text-[#000000]">
                   <svg
                     className="h-3 w-3"
                     viewBox="0 0 24 24"
@@ -113,7 +113,7 @@ const HeroVisual = () => {
               <div className="mt-2.5 space-y-2">
                 <div className="flex items-center justify-between text-[11px]">
                   <span className="text-slate-500 font-medium">Indexed Nodes</span>
-                  <span className="font-mono font-bold text-[#0C162C]">
+                  <span className="font-mono font-bold text-[#111111]">
                     {pulseCount.toLocaleString()}
                   </span>
                 </div>
@@ -123,7 +123,7 @@ const HeroVisual = () => {
                     <div
                       key={i}
                       style={{ height: `${h}%` }}
-                      className={`w-full rounded-full bg-gradient-to-t from-[#0D5B5A] to-[#14B8A6] transition-all duration-500 ${
+                      className={`w-full rounded-full bg-gradient-to-t from-[#000000] to-[#666666] transition-all duration-500 ${
                         i % 2 === 0 ? 'opacity-95' : 'opacity-70'
                       }`}
                     />
@@ -132,10 +132,10 @@ const HeroVisual = () => {
 
                 <div className="flex items-center justify-between text-[10px] text-slate-500 pt-0.5">
                   <span className="flex items-center gap-1 font-medium">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#14B8A6]" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#666666]" />
                     Latency 0.02s
                   </span>
-                  <span className="font-bold text-[#0D5B5A]">Sync: 100%</span>
+                  <span className="font-bold text-[#000000]">Sync: 100%</span>
                 </div>
               </div>
             </div>
@@ -146,9 +146,9 @@ const HeroVisual = () => {
                 transform: `translate3d(${tilt.rotateY * -0.8}px, ${tilt.rotateX * 0.8}px, 50px)`,
                 transition: 'transform 0.2s cubic-bezier(0.25, 1, 0.5, 1)',
               }}
-              className="absolute -left-2 sm:left-2 top-[12%] z-20 hidden sm:flex items-center gap-2.5 rounded-2xl border border-slate-200/90 bg-white/95 px-3.5 py-2.5 backdrop-blur-xl shadow-[0_15px_35px_rgba(13,91,90,0.12),0_0_20px_rgba(20,184,166,0.1)] transition-colors duration-300 hover:border-teal-400 animate-float-slow"
+              className="absolute -left-2 sm:left-2 top-[12%] z-20 hidden sm:flex items-center gap-2.5 rounded-2xl border border-slate-200/90 bg-white/95 px-3.5 py-2.5 backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.12),0_0_20px_rgba(102,102,102,0.1)] transition-colors duration-300 hover:border-teal-400 animate-float-slow"
             >
-              <div className="flex h-7 w-7 items-center justify-center rounded-xl bg-[#0D5B5A] text-white shadow-sm">
+              <div className="flex h-7 w-7 items-center justify-center rounded-xl bg-[#000000] text-white shadow-sm">
                 <svg
                   className="h-3.5 w-3.5"
                   viewBox="0 0 24 24"
@@ -161,7 +161,7 @@ const HeroVisual = () => {
                 </svg>
               </div>
               <div>
-                <p className="text-[11px] font-bold text-[#0C162C] leading-tight">
+                <p className="text-[11px] font-bold text-[#111111] leading-tight">
                   Semantic Recall
                 </p>
                 <p className="text-[10px] font-medium text-slate-500">

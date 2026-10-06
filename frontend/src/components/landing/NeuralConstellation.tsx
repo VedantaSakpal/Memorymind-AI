@@ -32,7 +32,7 @@ export const NeuralConstellation = () => {
     window.addEventListener('resize', handleResize);
 
     // Color palette for neural nodes matching reference image
-    const colors = ['#0D5B5A', '#14B8A6', '#0F766E', '#06B6D4', '#0C192E'];
+    const colors = ['#000000', '#666666', '#0F766E', '#06B6D4', '#111111'];
 
     // Generate particles
     const particleCount = Math.min(Math.floor((width * height) / 18000), 55);

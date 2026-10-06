@@ -1,27 +1,103 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '@/ui/Logo';
+import { authApi } from '@/api/auth';
+import { useAuth } from '@/contexts/AuthContext';
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('rishabhmahadik@gmail.com');
-  const [password, setPassword] = useState('••••••••••••');
-  const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(true);
+  const { login } = useAuth();
 
-  const handleLogin = (e: React.FormEvent) => {
+  // Toggle: 'login' | 'signup'
+  const [mode, setMode] = useState<'login' | 'signup'>('login');
+
+  // Shared fields
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
+  // Signup-only fields
+  const [fullName, setFullName] = useState('');
+
+  // UI state
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
+  const [showResend, setShowResend] = useState(false);
+  const [isResending, setIsResending] = useState(false);
+  const [resendStatus, setResendStatus] = useState('');
+
+  const handleResendVerification = async () => {
+    if (!email) {
+      setError('Please enter your email address to resend the verification link.');
+      return;
+    }
+    setIsResending(true);
+    setResendStatus('');
+    try {
+      const res = await authApi.resendVerification(email);
+      setResendStatus(res.message);
+    } catch (err: unknown) {
+      const detail =
+        (err as { response?: { data?: { detail?: string } } })?.response?.data?.detail ||
+        'Failed to resend verification link. Please try again.';
+      setResendStatus(detail);
+    } finally {
+      setIsResending(false);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    navigate('/dashboard');
+    setError('');
+    setSuccessMsg('');
+    setResendStatus('');
+    setIsLoading(true);
+
+    try {
+      if (mode === 'login') {
+        const tokens = await authApi.login({ email, password });
+        await login(tokens);
+        navigate('/dashboard');
+      } else {
+        if (!fullName.trim()) {
+          setError('Please enter your full name.');
+          setIsLoading(false);
+          return;
+        }
+        await authApi.register({ email, password, full_name: fullName });
+        setSuccessMsg(
+          `Account created! A verification link has been sent to ${email}. Please verify your email before logging in.`
+        );
+        setShowResend(true);
+        setMode('login');
+      }
+    } catch (err: unknown) {
+      const detail = (err as { response?: { data?: { detail?: string | Array<{ msg: string }> } } })?.response?.data?.detail;
+      let msg = 'Something went wrong. Please try again.';
+      if (typeof detail === 'string') {
+        msg = detail;
+      } else if (Array.isArray(detail) && detail.length > 0) {
+        msg = detail.map((d) => d.msg).join(', ');
+      }
+
+      setError(msg);
+      if (typeof msg === 'string' && msg.toLowerCase().includes('not verified')) {
+        setShowResend(true);
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div className="flex min-h-screen w-full bg-white font-sans antialiased text-slate-900">
       {/* LEFT COLUMN: Dark Navy / Futuristic Hero */}
-      <div className="relative hidden w-1/2 flex-col justify-between overflow-hidden bg-[#0C192E] p-12 text-white lg:flex xl:p-16">
+      <div className="relative hidden w-1/2 flex-col justify-between overflow-hidden bg-[#111111] p-12 text-white lg:flex xl:p-16">
         {/* Background ambient glows & particle constellation */}
         <div className="pointer-events-none absolute -top-24 -left-24 h-96 w-96 rounded-full bg-teal-500/20 blur-[100px]" />
         <div className="pointer-events-none absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-cyan-600/20 blur-[120px]" />
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(#14b8a6_1px,transparent_1px)] [background-size:24px_24px] opacity-20" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(#666666_1px,transparent_1px)] [background-size:24px_24px] opacity-20" />
 
         {/* Top brand */}
         <Link to="/" className="relative z-10 flex items-center gap-3 group">
@@ -35,38 +111,36 @@ const LoginPage = () => {
         <div className="relative z-10 my-auto flex flex-col items-center text-center">
           <div className="mb-6">
             <h1 className="text-3xl font-extrabold tracking-tight text-white xl:text-4xl">
-              Welcome Back!
+              {mode === 'login' ? 'Welcome Back!' : 'Start Learning Smarter'}
             </h1>
             <p className="mt-2 text-base text-slate-300">
-              Login to continue your journey of learning.
+              {mode === 'login'
+                ? 'Login to continue your journey of learning.'
+                : 'Create your account and upload your first document.'}
             </p>
           </div>
 
-          {/* Futuristic AI Student / Hologram Visual */}
+          {/* Futuristic AI visual */}
           <div className="relative flex h-[320px] w-full max-w-[380px] items-center justify-center">
-            {/* Holographic glowing base */}
             <div className="absolute bottom-4 h-24 w-64 rounded-full bg-teal-500/30 blur-2xl animate-pulse" />
             <div className="absolute bottom-8 h-12 w-48 rounded-full border border-teal-400/40 bg-teal-500/10" />
 
-            {/* Glowing avatar visual frame */}
             <div className="relative z-10 flex flex-col items-center">
-              <div className="relative flex h-36 w-36 items-center justify-center rounded-3xl border border-teal-500/40 bg-gradient-to-tr from-teal-950/70 to-slate-900/70 p-4 shadow-[0_0_40px_rgba(20,184,166,0.3)] backdrop-blur-xl">
-                <div className="flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-tr from-[#0D5B5A] to-[#14B8A6] text-4xl shadow-inner">
-                  👨‍💻
+              <div className="relative flex h-36 w-36 items-center justify-center rounded-3xl border border-teal-500/40 bg-gradient-to-tr from-teal-950/70 to-slate-900/70 p-4 shadow-[0_0_40px_rgba(102,102,102,0.3)] backdrop-blur-xl">
+                <div className="flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-tr from-[#000000] to-[#666666] text-4xl shadow-inner">
+                  {mode === 'login' ? '👨‍💻' : '🚀'}
                 </div>
-                {/* Floating nodes around avatar */}
-                <div className="absolute -top-3 -right-3 flex h-8 w-8 items-center justify-center rounded-full border border-teal-400/50 bg-[#0C192E] text-sm shadow-md animate-bounce">
+                <div className="absolute -top-3 -right-3 flex h-8 w-8 items-center justify-center rounded-full border border-teal-400/50 bg-[#111111] text-sm shadow-md animate-bounce">
                   ⚡
                 </div>
-                <div className="absolute -bottom-2 -left-3 flex h-8 w-8 items-center justify-center rounded-full border border-teal-400/50 bg-[#0C192E] text-sm shadow-md">
+                <div className="absolute -bottom-2 -left-3 flex h-8 w-8 items-center justify-center rounded-full border border-teal-400/50 bg-[#111111] text-sm shadow-md">
                   🧠
                 </div>
               </div>
 
-              {/* Floating Hologram Data stream pills */}
               <div className="mt-6 flex flex-wrap justify-center gap-2">
                 <span className="rounded-full border border-teal-500/30 bg-teal-950/60 px-3 py-1 text-xs text-teal-200 backdrop-blur-md">
-                  ● 128 Documents Synced
+                  ● Documents Synced
                 </span>
                 <span className="rounded-full border border-cyan-500/30 bg-cyan-950/60 px-3 py-1 text-xs text-cyan-200 backdrop-blur-md">
                   ✦ Neural Graph Ready
@@ -97,71 +171,67 @@ const LoginPage = () => {
           {/* Form Header */}
           <div className="mb-8">
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">
-              Login to your account
+              {mode === 'login' ? 'Login to your account' : 'Create an account'}
             </h2>
             <p className="mt-1.5 text-sm text-slate-500">
-              Welcome back! Please enter your details.
+              {mode === 'login'
+                ? 'Welcome back! Please enter your details.'
+                : 'Start your AI-powered learning journey today.'}
             </p>
           </div>
 
-          {/* Social Logins */}
-          <div className="space-y-3">
-            <button
-              type="button"
-              onClick={() => navigate('/dashboard')}
-              className="flex w-full items-center justify-center gap-3 rounded-xl border border-slate-200 bg-white py-2.5 px-4 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 hover:border-slate-300"
-            >
-              {/* Google G icon */}
-              <svg className="h-5 w-5" viewBox="0 0 24 24">
-                <path
-                  fill="#4285F4"
-                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                />
-                <path
-                  fill="#34A853"
-                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                />
-                <path
-                  fill="#FBBC05"
-                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
-                />
-                <path
-                  fill="#EA4335"
-                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
-                />
-              </svg>
-              Continue with Google
-            </button>
-
-            <button
-              type="button"
-              onClick={() => navigate('/dashboard')}
-              className="flex w-full items-center justify-center gap-3 rounded-xl border border-slate-200 bg-white py-2.5 px-4 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 hover:border-slate-300"
-            >
-              {/* GitHub icon */}
-              <svg className="h-5 w-5 fill-slate-800" viewBox="0 0 24 24">
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                />
-              </svg>
-              Continue with GitHub
-            </button>
-          </div>
-
-          {/* Divider */}
-          <div className="relative my-6 flex items-center justify-center">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-slate-200" />
+          {/* Error / Success Banner */}
+          {error && (
+            <div className="mb-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+              {error}
             </div>
-            <span className="relative bg-white px-3 text-xs uppercase text-slate-400 font-medium">
-              or
-            </span>
-          </div>
+          )}
+          {successMsg && (
+            <div className="mb-4 rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
+              {successMsg}
+            </div>
+          )}
 
-          {/* Login Form */}
-          <form onSubmit={handleLogin} className="space-y-4">
+          {/* Resend Verification Option */}
+          {showResend && (
+            <div className="mb-4 rounded-xl border border-teal-200 bg-teal-50/70 p-3.5 text-xs text-slate-700">
+              <div className="flex items-center justify-between">
+                <span>Need a verification link?</span>
+                <button
+                  type="button"
+                  onClick={handleResendVerification}
+                  disabled={isResending}
+                  className="font-semibold text-[#000000] hover:underline disabled:opacity-50"
+                >
+                  {isResending ? 'Sending...' : 'Resend Email'}
+                </button>
+              </div>
+              {resendStatus && (
+                <p className="mt-2 text-xs font-medium text-[#000000]">{resendStatus}</p>
+              )}
+            </div>
+          )}
+
+          {/* Main Form */}
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Full Name (Signup only) */}
+            {mode === 'signup' && (
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  placeholder="John Doe"
+                  className="w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 transition focus:border-[#000000] focus:outline-none focus:ring-2 focus:ring-[#000000]/20"
+                />
+              </div>
+            )}
+
+            {/* Email */}
             <div>
               <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                 Email address
@@ -172,10 +242,11 @@ const LoginPage = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="name@example.com"
-                className="w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 transition focus:border-[#0D5B5A] focus:outline-none focus:ring-2 focus:ring-[#0D5B5A]/20"
+                className="w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 transition focus:border-[#000000] focus:outline-none focus:ring-2 focus:ring-[#000000]/20"
               />
             </div>
 
+            {/* Password */}
             <div>
               <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                 Password
@@ -186,8 +257,9 @@ const LoginPage = () => {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter your password"
-                  className="w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 pr-10 text-sm text-slate-900 placeholder-slate-400 transition focus:border-[#0D5B5A] focus:outline-none focus:ring-2 focus:ring-[#0D5B5A]/20"
+                  placeholder={mode === 'signup' ? 'Min. 8 characters' : 'Enter your password'}
+                  minLength={mode === 'signup' ? 8 : undefined}
+                  className="w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 pr-10 text-sm text-slate-900 placeholder-slate-400 transition focus:border-[#000000] focus:outline-none focus:ring-2 focus:ring-[#000000]/20"
                 />
                 <button
                   type="button"
@@ -195,78 +267,75 @@ const LoginPage = () => {
                   className="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-600"
                 >
                   {showPassword ? (
-                    <svg
-                      className="h-4 w-4"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18"
-                      />
+                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18" />
                     </svg>
                   ) : (
-                    <svg
-                      className="h-4 w-4"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                      />
+                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                     </svg>
                   )}
                 </button>
               </div>
+              {mode === 'signup' && (
+                <p className="mt-1 text-[11px] text-slate-500">
+                  Must be at least 8 characters with 1 uppercase, 1 lowercase, 1 number, and 1 special character.
+                </p>
+              )}
             </div>
 
-            {/* Remember Me & Forgot Password */}
-            <div className="flex items-center justify-between pt-1">
-              <label className="flex items-center gap-2 cursor-pointer text-xs text-slate-600 font-medium">
-                <input
-                  type="checkbox"
-                  checked={rememberMe}
-                  onChange={(e) => setRememberMe(e.target.checked)}
-                  className="h-4 w-4 rounded border-slate-300 text-[#0D5B5A] focus:ring-[#0D5B5A]"
-                />
-                Remember me
-              </label>
-              <a
-                href="#forgot"
-                className="text-xs font-semibold text-[#0D5B5A] hover:underline"
-              >
-                Forgot password?
-              </a>
-            </div>
+            {/* Forgot Password (login only) */}
+            {mode === 'login' && (
+              <div className="flex justify-end pt-1">
+                <a href="#forgot" className="text-xs font-semibold text-[#000000] hover:underline">
+                  Forgot password?
+                </a>
+              </div>
+            )}
 
             {/* Submit Button */}
             <button
               type="submit"
-              className="mt-2 w-full rounded-xl bg-[#0D5B5A] py-3 text-sm font-semibold text-white shadow-[0_4px_18px_rgba(13,91,90,0.35)] transition duration-200 hover:bg-[#0A4A49] hover:shadow-[0_6px_22px_rgba(13,91,90,0.45)] active:scale-[0.99]"
+              disabled={isLoading}
+              className="mt-2 w-full rounded-xl bg-[#000000] py-3 text-sm font-semibold text-white shadow-[0_4px_18px_rgba(0,0,0,0.35)] transition duration-200 hover:bg-[#000000] hover:shadow-[0_6px_22px_rgba(0,0,0,0.45)] active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
-              Login
+              {isLoading ? (
+                <>
+                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                  {mode === 'login' ? 'Logging in...' : 'Creating account...'}
+                </>
+              ) : mode === 'login' ? (
+                'Login'
+              ) : (
+                'Create Account'
+              )}
             </button>
           </form>
 
-          {/* Footer Register prompt */}
+          {/* Toggle mode */}
           <div className="mt-8 text-center text-xs text-slate-500">
-            Don&apos;t have an account?{' '}
-            <Link to="/login" className="font-bold text-[#0D5B5A] hover:underline">
-              Register
-            </Link>
+            {mode === 'login' ? (
+              <>
+                Don&apos;t have an account?{' '}
+                <button
+                  onClick={() => { setMode('signup'); setError(''); setSuccessMsg(''); }}
+                  className="font-bold text-[#000000] hover:underline"
+                >
+                  Sign Up
+                </button>
+              </>
+            ) : (
+              <>
+                Already have an account?{' '}
+                <button
+                  onClick={() => { setMode('login'); setError(''); setSuccessMsg(''); }}
+                  className="font-bold text-[#000000] hover:underline"
+                >
+                  Log In
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>

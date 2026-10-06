@@ -14,6 +14,6 @@ def test_health_endpoint() -> None:
     assert response.status_code == 200
     assert response.json() == {
         "status": "ok",
-        "service": "MemoryMind AI Backend",
+        "service": "MemoryMind AI",
         "version": "0.1.0",
     }

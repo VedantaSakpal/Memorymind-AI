@@ -52,10 +52,10 @@ export const HeroPromptDemo = () => {
   };
 
   return (
-    <div className="w-full max-w-2xl rounded-2xl border border-slate-200/90 bg-white/95 p-5 backdrop-blur-xl shadow-[0_15px_40px_rgba(13,91,90,0.1)] transition duration-300 hover:border-teal-400">
+    <div className="w-full max-w-2xl rounded-2xl border border-slate-200/90 bg-white/95 p-5 backdrop-blur-xl shadow-[0_15px_40px_rgba(0,0,0,0.1)] transition duration-300 hover:border-teal-400">
       {/* Top Interactive Prompt Pills */}
       <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-        <span className="text-xs font-bold text-[#0D5B5A] flex items-center gap-1.5">
+        <span className="text-xs font-bold text-[#000000] flex items-center gap-1.5">
           <span className="h-2 w-2 rounded-full bg-emerald-500 animate-ping" />
           Interactive Second Brain Query
         </span>
@@ -72,8 +72,8 @@ export const HeroPromptDemo = () => {
             onClick={() => handleSelect(preset)}
             className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all duration-200 ${
               selectedPreset.id === preset.id
-                ? 'bg-[#0D5B5A] text-white shadow-[0_4px_14px_rgba(13,91,90,0.3)] scale-[1.02]'
-                : 'border border-slate-200 bg-slate-50 text-slate-600 hover:border-teal-300 hover:text-[#0C162C]'
+                ? 'bg-[#000000] text-white shadow-[0_4px_14px_rgba(0,0,0,0.3)] scale-[1.02]'
+                : 'border border-slate-200 bg-slate-50 text-slate-600 hover:border-teal-300 hover:text-[#111111]'
             }`}
           >
             {preset.label}
@@ -83,7 +83,7 @@ export const HeroPromptDemo = () => {
 
       {/* Query Bar */}
       <div className="mt-3 rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 flex items-center gap-3">
-        <span className="text-[#0D5B5A] text-sm">🔍</span>
+        <span className="text-[#000000] text-sm">🔍</span>
         <span className="text-xs sm:text-sm font-medium text-slate-800 truncate">
           {selectedPreset.query}
         </span>
@@ -92,8 +92,8 @@ export const HeroPromptDemo = () => {
       {/* Simulated Instant AI Response Box */}
       <div className="mt-3 rounded-xl border border-teal-500/20 bg-teal-50/50 p-3.5">
         <div className="flex items-center justify-between text-[11px] text-teal-800 pb-1.5">
-          <span className="font-bold text-[#0C162C] flex items-center gap-1.5">
-            <span className="flex h-4 w-4 items-center justify-center rounded-md bg-[#0D5B5A] text-white text-[10px]">
+          <span className="font-bold text-[#111111] flex items-center gap-1.5">
+            <span className="flex h-4 w-4 items-center justify-center rounded-md bg-[#000000] text-white text-[10px]">
               ✨
             </span>
             MemoryMind AI Synthesis
@@ -115,7 +115,7 @@ export const HeroPromptDemo = () => {
           {selectedPreset.sources.map((src, i) => (
             <span
               key={i}
-              className="inline-flex items-center gap-1 rounded-md border border-teal-600/20 bg-white px-2 py-0.5 text-[10px] font-mono text-[#0D5B5A] shadow-xs"
+              className="inline-flex items-center gap-1 rounded-md border border-teal-600/20 bg-white px-2 py-0.5 text-[10px] font-mono text-[#000000] shadow-xs"
             >
               📄 {src}
             </span>

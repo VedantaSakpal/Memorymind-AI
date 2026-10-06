@@ -1,3 +1,5 @@
+import colors from 'tailwindcss/colors';
+
 export default {
   content: ['./index.html', './src/**/*.{ts,tsx,js,jsx}'],
   theme: {
@@ -9,17 +11,25 @@ export default {
         secondary: 'var(--color-secondary)',
         text: 'var(--color-text)',
         muted: 'var(--color-muted)',
-        brandNavy: '#0C162C',
+        brandNavy: '#111111',
         brandTeal: {
-          DEFAULT: '#0D5B5A',
-          dark: '#0A4A49',
-          light: '#14B8A6',
+          DEFAULT: '#000000',
+          dark: '#111111',
+          light: '#333333',
         },
-        brandMint: '#2DD4BF',
-        brandIce: '#E6EFF1',
+        brandMint: '#666666',
+        brandIce: '#F5F5F5',
+        violet: colors.neutral,
+        sky: colors.neutral,
+        fuchsia: colors.neutral,
+        pink: colors.neutral,
+        indigo: colors.neutral,
+        cyan: colors.neutral,
+        teal: colors.neutral,
+        emerald: colors.neutral,
       },
       boxShadow: {
-        card: '0 10px 30px rgba(15, 23, 42, 0.08)',
+        card: '0 4px 12px rgba(0, 0, 0, 0.05)',
       },
     },
   },

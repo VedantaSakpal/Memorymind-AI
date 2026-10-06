@@ -1,0 +1,88 @@
+# Secure Email Authentication — Walkthrough
+
+## Summary
+
+Implemented full secure email authentication with mandatory email verification for MemoryMind AI. No duplicate auth systems were created — the existing code was extended in-place.
+
+---
+
+## Changes Made
+
+### Backend
+
+| File | Change |
+|------|--------|
+| [`backend/models/auth.py`](file:///c:/Users/VARAD/Desktop/MemoryMind-AI/backend/models/auth.py) | NEW — `VerificationToken` SQLAlchemy model |
+| [`backend/models/user.py`](file:///c:/Users/VARAD/Desktop/MemoryMind-AI/backend/models/user.py) | Added `verification_tokens` back-reference relationship |
+| [`backend/models/__init__.py`](file:///c:/Users/VARAD/Desktop/MemoryMind-AI/backend/models/__init__.py) | Exported `VerificationToken` |
+| [`backend/alembic/versions/f98bc9baed5c_add_verification_token_table.py`](file:///c:/Users/VARAD/Desktop/MemoryMind-AI/backend/alembic/versions/f98bc9baed5c_add_verification_token_table.py) | Alembic migration with proper upgrade/downgrade DDL |
+| [`backend/schemas/user.py`](file:///c:/Users/VARAD/Desktop/MemoryMind-AI/backend/schemas/user.py) | Added Pydantic `field_validator` for password strength (8+ chars, uppercase, lowercase, number, special char) |
+| [`backend/schemas/auth.py`](file:///c:/Users/VARAD/Desktop/MemoryMind-AI/backend/schemas/auth.py) | Added `VerifyEmailRequest`, `ResendVerificationRequest`, `MessageResponse` schemas |
+| [`backend/services/email_service.py`](file:///c:/Users/VARAD/Desktop/MemoryMind-AI/backend/services/email_service.py) | NEW — `EmailService` (dev: prints link to console; prod: sends via SMTP if configured) |
+| [`backend/api/v1/auth.py`](file:///c:/Users/VARAD/Desktop/MemoryMind-AI/backend/api/v1/auth.py) | Updated all auth endpoints (see below) |
+| [`backend/middleware/exception_handler.py`](file:///c:/Users/VARAD/Desktop/MemoryMind-AI/backend/middleware/exception_handler.py) | Added `detail` at root of HTTP error response for frontend/OAuth2 compatibility |
+| [`backend/core/database.py`](file:///c:/Users/VARAD/Desktop/MemoryMind-AI/backend/core/database.py) | Added `pool_pre_ping=True` to engine |
+
+### Auth Endpoint Changes (`backend/api/v1/auth.py`)
+
+| Endpoint | Change |
+|----------|--------|
+| `POST /register` | Generates a secure 32-byte `secrets.token_urlsafe` token, stores in `verification_tokens` with 24h expiry, sends verification email. User is **not** logged in automatically. |
+| `POST /login` | Now rejects unverified users with **HTTP 403** and a clear message. |
+| `POST /verify-email` | **NEW** — accepts `{ token }`, marks user as verified, deletes all their tokens (single-use). Rejects expired tokens with 400. |
+| `POST /resend-verification` | **NEW** — accepts `{ email }`, enforces 2-minute rate limit per user, generates fresh token, sends new email. Never reveals user existence. |
+| `GET /me` | Updated `get_current_user` dependency to also check `is_verified`. |
+| `POST /refresh` | Updated to also check `is_verified`. |
+
+### Database (Supabase)
+
+- Created `verification_tokens` table directly via Supabase MCP (since Alembic can't connect in dev):
+  - `id UUID PK`, `user_id UUID FK → users.id ON DELETE CASCADE`, `token VARCHAR UNIQUE`, `expires_at TIMESTAMPTZ`, `created_at/updated_at TIMESTAMPTZ`
+
+### Frontend
+
+| File | Change |
+|------|--------|
+| [`frontend/src/api/auth.ts`](file:///c:/Users/VARAD/Desktop/MemoryMind-AI/frontend/src/api/auth.ts) | Added `verifyEmail(token)` and `resendVerification(email)` methods |
+| [`frontend/src/pages/VerifyEmailPage.tsx`](file:///c:/Users/VARAD/Desktop/MemoryMind-AI/frontend/src/pages/VerifyEmailPage.tsx) | **NEW** — Full verification page with success/error states and inline resend form |
+| [`frontend/src/routes/AppRoutes.tsx`](file:///c:/Users/VARAD/Desktop/MemoryMind-AI/frontend/src/routes/AppRoutes.tsx) | Registered `/verify-email` public route |
+| [`frontend/src/pages/LoginPage.tsx`](file:///c:/Users/VARAD/Desktop/MemoryMind-AI/frontend/src/pages/LoginPage.tsx) | Registration now shows verification pending message (not auto-login), shows resend banner if unverified login is attempted, password strength hint added |
+
+---
+
+## User Flow
+
+```
+Register → Account created (is_verified=False)
+         → Verification link printed to backend console (dev mode)
+         → User clicks link → /verify-email?token=...
+         → Token validated → is_verified=True
+         → User can now log in
+
+Login (unverified) → HTTP 403 "Email not verified"
+                   → "Resend Email" button appears in LoginPage
+```
+
+---
+
+## Tests (`backend/tests/test_auth_verification.py`) — All 4 Passed ✅
+
+| Test | Validates |
+|------|-----------|
+| `test_password_strength_validation` | 5 weak password variants all rejected with 422 |
+| `test_full_registration_verification_and_login_flow` | Register → blocked login → valid token → single-use check → verified login → `/me` access |
+| `test_resend_verification_and_rate_limiting` | Rate limiting returns 429 immediately after registration |
+| `test_expired_token_handling` | Expired token (set manually in DB) rejected with 400 |
+
+---
+
+## How to Test Manually
+
+1. **Start backend**: run `uvicorn backend.main:app --reload` from the `backend/` directory
+2. **Register** a new user via the frontend signup page or `POST /api/v1/auth/register`
+3. **Check backend console** for the verification link (printed with `📧 [EMAIL DISPATCH - DEV MODE]`)
+4. **Visit the link** in your browser: `http://localhost:5173/verify-email?token=<TOKEN>`
+5. **Click "Continue to Login"** and log in with your credentials
+
+> [!TIP]
+> To set up real SMTP for production, add `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD` to your `.env` file.

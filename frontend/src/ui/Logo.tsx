@@ -4,13 +4,13 @@ const Logo = () => (
       viewBox="0 0 36 36"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="h-8 w-8 text-[#0C162C] transition-transform duration-300 hover:scale-105"
+      className="h-8 w-8 text-[#111111] transition-transform duration-300 hover:scale-105"
     >
       <defs>
         <linearGradient id="logoGlobeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#0D5B5A" />
-          <stop offset="50%" stopColor="#14B8A6" />
-          <stop offset="100%" stopColor="#0C162C" />
+          <stop offset="0%" stopColor="#000000" />
+          <stop offset="50%" stopColor="#666666" />
+          <stop offset="100%" stopColor="#111111" />
         </linearGradient>
       </defs>
       {/* Globe / Neural Mesh Sphere */}
@@ -18,7 +18,7 @@ const Logo = () => (
         cx="18"
         cy="18"
         r="14"
-        stroke="#0C162C"
+        stroke="#111111"
         strokeWidth="2"
       />
       {/* Horizontal grid parallels */}
@@ -27,7 +27,7 @@ const Logo = () => (
         cy="18"
         rx="14"
         ry="6"
-        stroke="#0C162C"
+        stroke="#111111"
         strokeWidth="1.6"
       />
       <line
@@ -35,7 +35,7 @@ const Logo = () => (
         y1="18"
         x2="32"
         y2="18"
-        stroke="#0C162C"
+        stroke="#111111"
         strokeWidth="1.6"
       />
       {/* Vertical meridian */}
@@ -44,11 +44,11 @@ const Logo = () => (
         cy="18"
         rx="6"
         ry="14"
-        stroke="#0C162C"
+        stroke="#111111"
         strokeWidth="1.6"
       />
       {/* Center cybernetic pulse dot */}
-      <circle cx="18" cy="18" r="2.5" fill="#14B8A6" />
+      <circle cx="18" cy="18" r="2.5" fill="#666666" />
     </svg>
   </div>
 );
