@@ -7,7 +7,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 config_directory = Path(__file__).resolve().parent.parent
 dotenv_path = config_directory / ".env"
-load_dotenv(dotenv_path=dotenv_path, override=False)
+load_dotenv(dotenv_path=dotenv_path, override=True)
 
 
 class Settings(BaseModel):
@@ -31,6 +31,8 @@ class Settings(BaseModel):
     SUPABASE_ANON_KEY: str = Field(...)
     SUPABASE_SERVICE_ROLE_KEY: str = Field("not-set")
     SUPABASE_STORAGE_BUCKET: str = Field("documents")
+    
+    GEMINI_API_KEY: str = Field(default="")
 
     ALLOWED_ORIGINS: List[str] = Field(default=["http://localhost:5173", "http://localhost:3000"])
 

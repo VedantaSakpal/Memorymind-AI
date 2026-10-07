@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import { createChatSession, streamChatMessage } from '../api/chat';
 interface ChatMessage {
   id: string;
   sender: 'user' | 'ai';
@@ -33,59 +33,75 @@ const chatHistorySections = [
   },
 ];
 
-const initialMessages: ChatMessage[] = [
-  {
-    id: 'm1',
-    sender: 'user',
-    text: 'Explain A* Algorithm with an example.',
-    time: '11:42 AM',
-  },
-  {
-    id: 'm2',
-    sender: 'ai',
-    text: "A* (A-star) algorithm is a pathfinding algorithm that finds the shortest path between two nodes in a graph. It combines the benefits of Dijkstra's algorithm and Greedy Best-First Search.",
-    formula: 'f(n) = g(n) + h(n)',
-    details: [
-      'g(n) = Cost from start node to current node',
-      'h(n) = Heuristic estimate from current node to goal',
-    ],
-    showGraph: true,
-    time: '11:43 AM',
-  },
-];
+const initialMessages: ChatMessage[] = [];
 
 const AIChatPage = () => {
   const [messages, setMessages] = useState<ChatMessage[]>(initialMessages);
   const [inputText, setInputText] = useState('');
   const [activeChatId, setActiveChatId] = useState('1');
+  const [sessionId, setSessionId] = useState<string | null>(null);
 
-  const handleSendMessage = (e: React.FormEvent) => {
+  const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputText.trim()) return;
 
+    const userText = inputText;
     const userMsg: ChatMessage = {
       id: Date.now().toString(),
       sender: 'user',
-      text: inputText,
+      text: userText,
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     };
 
     setMessages((prev) => [...prev, userMsg]);
     setInputText('');
 
-    setTimeout(() => {
+    let currentSessionId = sessionId;
+    const token = localStorage.getItem('access_token');
+    
+    if (!token) {
+      alert("Please log in to chat.");
+      return;
+    }
+
+    try {
+      if (!currentSessionId) {
+        const session = await createChatSession("New Chat", null, token);
+        currentSessionId = session.id;
+        setSessionId(session.id);
+      }
+
+      // Placeholder for AI reply
+      const aiReplyId = (Date.now() + 1).toString();
       const aiReply: ChatMessage = {
-        id: (Date.now() + 1).toString(),
+        id: aiReplyId,
         sender: 'ai',
-        text: `Synthesizing knowledge from your uploaded documents regarding "${userMsg.text}". MemoryMind AI has identified core cross-references in your notes.`,
-        details: [
-          'Direct match found in Machine Learning Basics.pdf (Page 42)',
-          'Associated concept node: Neural Pathways & Heuristics',
-        ],
+        text: '',
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
       setMessages((prev) => [...prev, aiReply]);
-    }, 600);
+
+      await streamChatMessage(
+        currentSessionId,
+        userText,
+        token,
+        (chunk) => {
+          setMessages((prev) => {
+            const newMessages = [...prev];
+            const lastMsgIndex = newMessages.findIndex(m => m.id === aiReplyId);
+            if (lastMsgIndex !== -1) {
+              newMessages[lastMsgIndex] = { 
+                ...newMessages[lastMsgIndex], 
+                text: newMessages[lastMsgIndex].text + chunk 
+              };
+            }
+            return newMessages;
+          });
+        }
+      );
+    } catch (error) {
+      console.error("Chat failed:", error);
+    }
   };
 
   return (

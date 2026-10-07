@@ -36,37 +36,63 @@ const UploadDocumentsPage = () => {
     }
   };
 
-  const simulateUpload = (files: FileList | null) => {
+  const handleUpload = async (files: FileList | null) => {
     if (!files || files.length === 0) return;
-    const newItems: UploadItem[] = Array.from(files).map((f) => ({
-      id: Math.random().toString(),
-      name: f.name,
-      size: `${(f.size / (1024 * 1024)).toFixed(1)} MB`,
-      progress: 0,
-      status: 'uploading',
-    }));
+    const token = localStorage.getItem('access_token');
+    if (!token) {
+      alert("Please login first to upload documents.");
+      return;
+    }
+    
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
-    setUploads((prev) => [...newItems, ...prev]);
+    Array.from(files).forEach(async (file) => {
+      const uploadId = Math.random().toString();
+      
+      if (file.size > 50 * 1024 * 1024) {
+        alert(`${file.name} is larger than 50MB limit.`);
+        return;
+      }
 
-    newItems.forEach((item) => {
-      let currentProgress = 0;
-      const interval = setInterval(() => {
-        currentProgress += 20;
-        if (currentProgress >= 100) {
-          clearInterval(interval);
-          setUploads((prev) =>
-            prev.map((u) =>
-              u.id === item.id ? { ...u, progress: 100, status: 'completed' } : u,
-            ),
-          );
-        } else {
-          setUploads((prev) =>
-            prev.map((u) =>
-              u.id === item.id ? { ...u, progress: currentProgress } : u,
-            ),
-          );
+      setUploads((prev) => [
+        {
+          id: uploadId,
+          name: file.name,
+          size: `${(file.size / (1024 * 1024)).toFixed(1)} MB`,
+          progress: 30, // Indicate it's uploading
+          status: 'uploading',
+        },
+        ...prev
+      ]);
+
+      try {
+        const formData = new FormData();
+        formData.append("file", file);
+
+        const response = await fetch(`${API_URL}/api/v1/documents/upload`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            // Do NOT set Content-Type for FormData
+          },
+          body: formData,
+        });
+
+        if (!response.ok) {
+           throw new Error("Upload failed");
         }
-      }, 300);
+        
+        await response.json();
+
+        setUploads((prev) =>
+          prev.map((u) =>
+            u.id === uploadId ? { ...u, progress: 100, status: 'completed' } : u,
+          ),
+        );
+      } catch (err) {
+        alert(`Failed to upload ${file.name}. Ensure backend is running.`);
+        setUploads((prev) => prev.filter((u) => u.id !== uploadId));
+      }
     });
   };
 
@@ -74,11 +100,11 @@ const UploadDocumentsPage = () => {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
-    simulateUpload(e.dataTransfer.files);
+    handleUpload(e.dataTransfer.files);
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    simulateUpload(e.target.files);
+    handleUpload(e.target.files);
   };
 
   return (

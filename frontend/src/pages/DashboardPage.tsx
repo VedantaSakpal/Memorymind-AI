@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 const stats = [
   {
@@ -80,12 +81,7 @@ const stats = [
   },
 ];
 
-const recentDocs = [
-  { name: 'Machine Learning Basics.pdf', time: 'Uploaded 2 hours ago', type: 'pdf' },
-  { name: 'Deep Learning Notes.docx', time: 'Uploaded Yesterday', type: 'docx' },
-  { name: 'System Design Architecture.pdf', time: 'Uploaded 3 days ago', type: 'pdf' },
-  { name: 'Quantum Computing Intro.txt', time: 'Uploaded 5 days ago', type: 'txt' },
-];
+
 
 const getFileIcon = (type: string) => {
   if (type === 'pdf') {
@@ -123,6 +119,41 @@ const getFileIcon = (type: string) => {
 };
 
 const DashboardPage = () => {
+  const [recentDocs, setRecentDocs] = useState<{name: string, time: string, type: string}[]>([]);
+  const [statsData, setStatsData] = useState(stats); // Could update stats too if needed
+
+  useEffect(() => {
+    const fetchDocs = async () => {
+      const token = localStorage.getItem('access_token');
+      if (!token) return;
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+      try {
+        const res = await fetch(`${API_URL}/api/v1/documents/`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        if (res.ok) {
+          const data = await res.json();
+          const mapped = data.slice(0, 4).map((d: any) => ({
+            name: d.name,
+            type: d.name.split('.').pop()?.toLowerCase() || 'pdf',
+            time: `Uploaded ${new Date(d.created_at).toLocaleDateString()}`
+          }));
+          setRecentDocs(mapped);
+          
+          // Update total documents stat
+          setStatsData(prev => {
+            const newStats = [...prev];
+            newStats[0].value = data.length.toString();
+            return newStats;
+          });
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    fetchDocs();
+  }, []);
+
   return (
     <div className="space-y-8">
       {/* Top Welcome & Actions Header */}
@@ -176,7 +207,7 @@ const DashboardPage = () => {
 
       {/* 4 Statistics Cards Grid */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 sm:gap-6">
-        {stats.map((item) => (
+        {statsData.map((item) => (
           <div
             key={item.title}
             className="group rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm transition hover:border-teal-400 hover:shadow-md"

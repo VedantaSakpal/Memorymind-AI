@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 interface DocumentItem {
@@ -28,49 +28,59 @@ const folders = [
   },
 ];
 
-const documents: DocumentItem[] = [
-  {
-    id: '1',
-    name: 'Machine Learning Basics.pdf',
-    type: 'pdf',
-    size: '5.4 MB',
-    uploadedAt: '11 May 2025',
-  },
-  {
-    id: '2',
-    name: 'Deep Learning Notes.pdf',
-    type: 'pdf',
-    size: '7.8 MB',
-    uploadedAt: '10 May 2025',
-  },
-  {
-    id: '3',
-    name: 'Operating Systems.pdf',
-    type: 'pdf',
-    size: '3.2 MB',
-    uploadedAt: '10 May 2025',
-  },
-  {
-    id: '4',
-    name: 'Data Structures.docx',
-    type: 'docx',
-    size: '2.1 MB',
-    uploadedAt: '08 May 2025',
-  },
-  {
-    id: '5',
-    name: 'Computer Networks.pdf',
-    type: 'pdf',
-    size: '4.6 MB',
-    uploadedAt: '08 May 2025',
-  },
-];
 
 const MyDocumentsPage = () => {
+  const [documents, setDocuments] = useState<DocumentItem[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedType, setSelectedType] = useState('All Types');
   const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
   const [openMenuId, setOpenMenuId] = useState<string | null>(null);
+
+  const fetchDocuments = async () => {
+    const token = localStorage.getItem('access_token');
+    if (!token) return;
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+    try {
+      const res = await fetch(`${API_URL}/api/v1/documents/`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (res.ok) {
+        const data = await res.json();
+        const mapped = data.map((d: any) => ({
+          id: d.id,
+          name: d.name,
+          type: d.name.split('.').pop()?.toLowerCase() || 'pdf',
+          size: 'Unknown',
+          uploadedAt: new Date(d.created_at).toLocaleDateString()
+        }));
+        setDocuments(mapped);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  useEffect(() => {
+    fetchDocuments();
+  }, []);
+
+  const handleDelete = async (id: string) => {
+    const token = localStorage.getItem('access_token');
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+    try {
+      const res = await fetch(`${API_URL}/api/v1/documents/${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (res.ok) {
+        setDocuments(prev => prev.filter(d => d.id !== id));
+      } else {
+        alert('Failed to delete document');
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   const filteredDocs = documents.filter((doc) =>
     doc.name.toLowerCase().includes(searchQuery.toLowerCase()),
@@ -351,6 +361,7 @@ const MyDocumentsPage = () => {
                           <div className="border-t border-slate-100 my-1" />
                           <button
                             type="button"
+                            onClick={() => handleDelete(doc.id)}
                             className="flex w-full items-center gap-2 px-3 py-2 rounded-lg text-rose-600 hover:bg-rose-50"
                           >
                             <span>🗑️</span> Delete

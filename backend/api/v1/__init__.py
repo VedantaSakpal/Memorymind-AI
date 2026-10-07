@@ -2,7 +2,11 @@ from fastapi import APIRouter
 
 from backend.api.v1.auth import router as auth_router
 from backend.api.v1.users import router as users_router
+from backend.api.v1.documents import router as documents_router
+from backend.api.v1.chat import router as chat_router
 
 router = APIRouter()
 router.include_router(auth_router, prefix="/auth", tags=["auth"])
 router.include_router(users_router, prefix="/users", tags=["users"])
+router.include_router(documents_router, prefix="/documents", tags=["documents"])
+router.include_router(chat_router, prefix="/chat", tags=["chat"])
