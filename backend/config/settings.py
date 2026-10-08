@@ -33,6 +33,7 @@ class Settings(BaseModel):
     SUPABASE_STORAGE_BUCKET: str = Field("documents")
     
     GEMINI_API_KEY: str = Field(default="")
+    GEMINI_MODEL: str = Field(default="gemini-3.8-flash")
 
     ALLOWED_ORIGINS: List[str] = Field(default=["http://localhost:5173", "http://localhost:3000"])
 

@@ -34,7 +34,7 @@ DOCUMENT CONTEXT:
     
     try:
         model = genai.GenerativeModel(
-            model_name='gemini-1.5-flash-latest',
+            model_name=settings.GEMINI_MODEL,
             system_instruction=system_prompt
         )
         
